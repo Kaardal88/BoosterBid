@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "npx tailwindcss -i ./css/input.css -o ./css/style.css --watch",
+    "build": "npx tailwindcss -i ./css/input.css -o ./css/style.css --minify",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/Kaardal88/BoosterBid/issues"
   },
-  "homepage": "https://github.com/Kaardal88/BoosterBid#readme"
+  "homepage": "https://github.com/Kaardal88/BoosterBid#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
 }
