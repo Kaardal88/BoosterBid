@@ -20,6 +20,9 @@
   },
   "homepage": "https://github.com/Kaardal88/BoosterBid#readme",
   "devDependencies": {
+    "@eslint/js": "^9.26.0",
+    "eslint": "^9.26.0",
+    "globals": "^16.1.0",
     "tailwindcss": "^3.4.17"
   }
 }
