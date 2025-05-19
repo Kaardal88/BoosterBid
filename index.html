@@ -4,61 +4,154 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BoosterBid</title>
-    <link rel="stylesheet" href="/css/style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/js/utilities/menu.js" defer></script>
   </head>
-  <body>
-    <main class="bg-gray-100 flex items-center justify-center min-h-screen">
-      <div class="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
-        <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">
-          Logg inn
-        </h2>
-        <form action="#" method="POST" class="space-y-4">
-          <div>
-            <label for="email" class="block text-sm font-medium text-gray-700"
-              >E-post</label
-            >
+  <body class="bg-gray-100 font-sans min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+      <div
+        class="container mx-auto px-4 py-4 flex items-center justify-between"
+      >
+        <!-- Logo Placeholder -->
+        <div class="text-2xl font-bold text-gray-800">
+          <img
+            src="/images/boosterbid_logo.png"
+            alt="Logo"
+            class="w-52 h-auto"
+          />
+        </div>
+
+        <!-- Search, Login, Register, Hamburger -->
+        <div class="flex items-center space-x-4">
+          <div class="relative flex items-center">
             <input
-              type="email"
-              id="email"
-              name="email"
-              required
-              placeholder="din@email.com"
-              class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+              type="text"
+              placeholder="Søk auksjoner..."
+              class="border rounded-l-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 w-32 sm:w-40"
             />
-          </div>
-          <div>
-            <label
-              for="password"
-              class="block text-sm font-medium text-gray-700"
-              >Passord</label
+            <button
+              class="bg-blue-500 hover:bg-blue-600 text-white rounded-r-md py-2 px-4"
             >
-            <input
-              type="password"
-              id="password"
-              name="password"
-              required
-              placeholder="••••••••"
-              class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+              Søk
+            </button>
           </div>
-          <button
-            type="submit"
-            class="w-full bg-blue-600 text-white py-2 rounded-xl hover:bg-blue-700 transition duration-200"
+          <a
+            href="/login"
+            class="bg-green-400 hover:bg-green-600 text-gray-800 rounded-md py-2 px-4 hidden sm:block"
+            >Logg inn</a
           >
-            Logg inn
-          </button>
-        </form>
-        <div class="mt-4 text-center">
-          <p class="text-sm text-gray-600">
-            Har du ikke konto?
-            <a
-              href="/register"
-              class="text-blue-600 hover:underline font-medium"
-              >Registrer deg</a
+          <a
+            href="/register"
+            class="bg-blue-500 hover:bg-blue-600 text-white rounded-md py-2 px-4 hidden sm:block"
+            >Registrer</a
+          >
+          <!-- Hamburger Menu -->
+          <button id="hamburger" class="text-gray-600 focus:outline-none">
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
             >
-          </p>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16m-7 6h7"
+              ></path>
+            </svg>
+          </button>
         </div>
       </div>
+      <!-- Navigation Menu -->
+      <nav id="nav-menu" class="hidden bg-white shadow-md p-4">
+        <div class="flex flex-col space-y-2">
+          <a
+            href="/login"
+            class="bg-green-400 hover:bg-green-600 text-gray-800 rounded-md py-2 px-4 sm:hidden"
+            >Logg inn</a
+          >
+          <a
+            href="/register"
+            class="bg-blue-500 hover:bg-blue-600 text-white rounded-md py-2 px-4 sm:hidden"
+            >Registrer</a
+          >
+          <a href="#" class="text-gray-600 hover:text-blue-600 py-2">Hjem</a>
+          <a href="#" class="text-gray-600 hover:text-blue-600 py-2"
+            >Auksjoner</a
+          >
+          <a href="#" class="text-gray-600 hover:text-blue-600 py-2">Om oss</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 flex-grow">
+      <h1 class="text-3xl font-bold mb-6">Aktive Auksjoner</h1>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Auction Card -->
+        <a
+          href="/login"
+          class="bg-white rounded-lg shadow-md hover:shadow-lg transition p-4"
+        >
+          <div class="w-full h-48 bg-gray-300 rounded mb-4"></div>
+          <h2 class="text-xl font-semibold mb-2">Vintage Stol</h2>
+          <p class="text-gray-600">Høyeste bud: 1200 NOK</p>
+          <p class="text-gray-600">Tid igjen: 2d 5t</p>
+        </a>
+        <a
+          href="/login"
+          class="bg-white rounded-lg shadow-md hover:shadow-lg transition p-4"
+        >
+          <div class="w-full h-48 bg-gray-300 rounded mb-4"></div>
+          <h2 class="text-xl font-semibold mb-2">Kunstverk</h2>
+          <p class="text-gray-600">Høyeste bud: 3500 NOK</p>
+          <p class="text-gray-600">Tid igjen: 1d 12t</p>
+        </a>
+        <a
+          href="/login"
+          class="bg-white rounded-lg shadow-md hover:shadow-lg transition p-4"
+        >
+          <div class="w-full h-48 bg-gray-300 rounded mb-4"></div>
+          <h2 class="text-xl font-semibold mb-2">Antikk Lampe</h2>
+          <p class="text-gray-600">Høyeste bud: 800 NOK</p>
+          <p class="text-gray-600">Tid igjen: 3d 8t</p>
+        </a>
+      </div>
     </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Contact</h3>
+            <p>E-mail: kontakt@auksjon.no</p>
+            <p>Phone: +47 123 45 678</p>
+            <p>Address: Auksjonsgata 1, Oslo</p>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold mb-4">FAQ</h3>
+            <a href="#" class="block text-gray-300 hover:text-white py-1"
+              >How do I make a bid?</a
+            >
+            <a href="#" class="block text-gray-300 hover:text-white py-1"
+              >Bid rules</a
+            >
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Info</h3>
+            <a href="#" class="block text-gray-300 hover:text-white py-1"
+              >About</a
+            >
+          </div>
+        </div>
+        <div class="mt-8 text-center text-gray-400">
+          © 2025 BoosterBid. All rights reserved.
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
