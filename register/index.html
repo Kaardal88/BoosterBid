@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BoosterBid</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/js/utilities/menu.js" defer></script>
+  </head>
+  <body class="bg-gray-100 font-sans min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+      <div
+        class="container mx-auto px-4 py-4 flex items-center justify-between"
+      >
+        <!-- Logo Placeholder -->
+        <div class="text-2xl font-bold text-gray-800">
+          <a href="/index.html"
+            ><img
+              src="/images/boosterbid_logo.png"
+              alt="Logo"
+              class="w-52 h-auto"
+          /></a>
+        </div>
+
+        <!-- Search, Login, Register, Hamburger -->
+        <div class="flex items-center space-x-4">
+          <div class="relative flex items-center">
+            <input
+              type="text"
+              placeholder="Søk auksjoner..."
+              class="border rounded-l-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 w-32 sm:w-40"
+            />
+            <button
+              class="bg-blue-500 hover:bg-blue-600 text-white rounded-r-md py-2 px-4"
+            >
+              Søk
+            </button>
+          </div>
+
+          <a
+            href="/register"
+            class="bg-blue-500 hover:bg-blue-600 text-white rounded-md py-2 px-4 hidden sm:block"
+            >Registrer</a
+          >
+          <!-- Hamburger Menu -->
+          <button id="hamburger" class="text-gray-600 focus:outline-none">
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16m-7 6h7"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <!-- Navigation Menu -->
+      <nav id="nav-menu" class="hidden bg-white shadow-md p-4">
+        <div class="flex flex-col space-y-2">
+          <a
+            href="/login"
+            class="bg-green-400 hover:bg-green-600 text-gray-800 rounded-md py-2 px-4 sm:hidden"
+            >Logg inn</a
+          >
+          <a
+            href="/register"
+            class="bg-blue-500 hover:bg-blue-600 text-white rounded-md py-2 px-4 sm:hidden"
+            >Registrer</a
+          >
+          <a href="#" class="text-gray-600 hover:text-blue-600 py-2">Hjem</a>
+          <a href="#" class="text-gray-600 hover:text-blue-600 py-2"
+            >Auksjoner</a
+          >
+          <a href="#" class="text-gray-600 hover:text-blue-600 py-2">Om oss</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 flex-grow">
+      <h1 class="text-3xl font-bold mb-20 text-center">
+        Register for an account
+      </h1>
+      <form id="form" class="space-y-6" action="/feed/index.html">
+        <div id="message"></div>
+        <fieldset>
+          <div>
+            <label for="name" class="block text-sm/6 font-medium text-gray-900"
+              >Name</label
+            >
+            <div class="mt-2">
+              <input
+                id="name"
+                name="name"
+                type="name"
+                pattern="[A-Za-z0-9_]+"
+                required
+                class="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+              />
+            </div>
+          </div>
+          <div>
+            <label for="email" class="block text-sm/6 font-medium text-gray-900"
+              >Email address</label
+            >
+            <div class="mt-2">
+              <input
+                id="email"
+                name="email"
+                type="email"
+                pattern="^[^@]+@(stud\.|)(noroff\.no)$"
+                title="Please provide a noroff.no or a stud.noroff.no email address."
+                autocomplete="email"
+                required
+                class="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+              />
+            </div>
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between">
+              <label
+                for="password"
+                class="block text-sm/6 font-medium text-gray-900"
+                >Password</label
+              >
+            </div>
+            <div class="mt-2">
+              <input
+                id="password"
+                name="password"
+                type="password"
+                autocomplete="current-password"
+                minlength="8"
+                required
+                class="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+              />
+            </div>
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between">
+              <label for="bio" class="block text-sm/6 font-medium text-gray-900"
+                >Bio</label
+              >
+            </div>
+            <div class="mt-2">
+              <textarea
+                id="bio"
+                name="bio"
+                rows="4"
+                cols="50"
+                class="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+              >
+              </textarea>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between">
+              <label
+                for="avatarUrl"
+                class="block text-sm/6 font-medium text-gray-900"
+                >Avatar</label
+              >
+            </div>
+            <div class="mt-2">
+              <input
+                type="url"
+                id="avatarUrl"
+                name="avatarUrl"
+                class="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+              />
+            </div>
+          </div>
+        </fieldset>
+
+        <div>
+          <button
+            id="reg-btn"
+            class="bg-blue-500 hover:bg-blue-600flex w-full justify-center rounded-md bg-customTeal px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-hoverTeal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Contact</h3>
+            <p>E-mail: kontakt@auksjon.no</p>
+            <p>Phone: +47 123 45 678</p>
+            <p>Address: Auksjonsgata 1, Oslo</p>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold mb-4">FAQ</h3>
+            <a href="#" class="block text-gray-300 hover:text-white py-1"
+              >How do I make a bid?</a
+            >
+            <a href="#" class="block text-gray-300 hover:text-white py-1"
+              >Bid rules</a
+            >
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Info</h3>
+            <a href="#" class="block text-gray-300 hover:text-white py-1"
+              >About</a
+            >
+          </div>
+        </div>
+        <div class="mt-8 text-center text-gray-400">
+          © 2025 BoosterBid. All rights reserved.
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
