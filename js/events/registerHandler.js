@@ -17,6 +17,15 @@ async function submitForm(event) {
     delete data.bio;
   }
 
+  if (data.avatarUrl.trim() === "") {
+    delete data.avatarUrl;
+  } else {
+    data.avatar = {
+      url: data.avatarUrl,
+      alt: `${data.name}'s avatar`,
+    };
+  }
+
   const fieldset = form.querySelector("fieldset");
   const button = form.querySelector("#reg-btn");
   const container = document.querySelector("#message");
