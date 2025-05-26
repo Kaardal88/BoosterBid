@@ -1,4 +1,4 @@
-/* import { loginHandler } from "./events/loginHandler.js"; */
+import { loginHandler } from "./events/loginHandler.js";
 import { registerHandler } from "./events/registerHandler.js";
 /* import { viewPostsHandler } from "./events/viewPostsHandler.js"; */
 /* import { createPostHandler } from "./events/createPostHandler.js"; */
@@ -15,7 +15,6 @@ function router() {
   switch (pathname) {
     case "/":
     case "/index.html":
-      loginHandler();
       break;
 
     case "/register/":
@@ -23,27 +22,32 @@ function router() {
       registerHandler();
       break;
 
+    case "/login/":
+    case "/login/index.html":
+      loginHandler();
+      break;
+
     case "/feed/":
     case "/feed/index.html":
-      viewPostsHandler();
+      /* viewPostsHandler();
       createPostHandler();
-      searchPostsHandler();
+      searchPostsHandler(); */
       break;
 
     case "/profile/":
     case "/profile/index.html":
-      viewPersonalPostsHandler();
-      logoutListener();
+      /* viewPersonalPostsHandler();
+      logoutListener(); */
       break;
 
     case "/post-detail/":
     case "/post-detail/index.html":
-      viewSinglePostHandler();
+      /* viewSinglePostHandler(); */
       break;
 
     case "/edit-post/":
     case "/edit-post/index.html":
-      editPostHandler();
+      /* editPostHandler(); */
       break;
 
     default:
