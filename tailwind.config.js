@@ -1,8 +1,16 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: ["./**/*.{html,js}", "!./node_modules/**/*"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: "#4D897F",
+        secondary: "#FF7F50",
+        accent: "#66fcf1",
+        primaryBtnHover: "#2B675D",
+        footer: "#486168",
+      },
+    },
   },
   plugins: [],
 };

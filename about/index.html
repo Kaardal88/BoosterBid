@@ -3,11 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BoosterBid | Home</title>
+    <title>BoosterBid</title>
     <link rel="stylesheet" href="/css/style.css" />
     <script src="/js/utilities/menu.js" defer></script>
     <script src="/js/app.js" type="module"></script>
-    <script src="/js/utils/scrollBehavior.js" defer></script>
   </head>
   <body
     class="relative bg-[url('/images/BB_bg_img.jpg')] bg-cover bg-center font-sans w-full min-h-screen flex flex-col"
@@ -36,30 +35,7 @@
               />
             </a>
           </div>
-          <div class="relative flex items-center">
-            <input
-              id="search-input"
-              type="text"
-              placeholder="Search auctions..."
-              class="border rounded-l-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 w-32 sm:w-40"
-            />
-            <button
-              id="search-btn"
-              class="bg-secondary hover:bg-primaryBtnHover text-black hover:text-white rounded-r-md py-2 px-4"
-            >
-              Search
-            </button>
-          </div>
-          <a
-            href="/login/index.html"
-            class="bg-primary hover:bg-primaryBtnHover text-white rounded-md py-2 px-4 hidden sm:block"
-            >Log in</a
-          >
-          <a
-            href="/register"
-            class="bg-primary hover:bg-primaryBtnHover text-white rounded-md py-2 px-4 hidden sm:block"
-            >Register</a
-          >
+
           <!-- Hamburger Menu -->
           <button id="hamburger" class="text-gray-600 focus:outline-none">
             <svg
@@ -85,54 +61,60 @@
           <a href="/index.html" class="text-white hover:focus-ring py-2"
             >Home</a
           >
-
-          <a
-            href="/about/index.html"
-            class="text-gray-600 hover:text-blue-600 py-2"
-            >About us</a
-          >
         </div>
       </nav>
     </header>
 
     <!-- Main Content -->
     <main class="container mx-auto px-4 py-8 flex-grow">
-      <h1 class="text-3xl font-bold mb-6 text-white">Active auctions</h1>
-      <div class="mb-4 flex items-center gap-3">
-        <label for="filter-status" class="text-sm text-gray-200">Filter</label>
-        <select id="filter-status" class="border rounded p-2 text-black">
-          <option value="all">Active Listings</option>
-          <option value="active">All Listings</option>
-        </select>
-
-        <!-- valgfritt: enkel tag-filtrering -->
-
-        <input
-          id="filter-tag"
-          type="text"
-          placeholder="tag (optional)"
-          class="border rounded p-2 text-black"
+      <section class="relative h-96 w-full rounded-md">
+        <img
+          src="/images/theOffice.jpg"
+          alt="Auction house illustration"
+          class="absolute inset-0 w-full h-full object-cover opacity-80"
         />
-      </div>
-      <div
-        id="auction-container"
-        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-full overflow-x-hidden"
-      ></div>
-      <div id="profile-container" class="max-w-4xl mx-auto -mt-16 px-4"></div>
-      <div class="mt-20 flex justify-center">
-        <button
-          id="load-more"
-          class="bg-primary hover:bg-primaryBtnHover text-white px-5 py-2 rounded hidden"
+        <div
+          class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center"
         >
-          See more
-        </button>
-      </div>
-      <a
-        id="scrollTopBtn"
-        href="#"
-        class="bg-primary hover:bg-primaryBtnHover text-white text-lg font-semibold rounded-full w-84 h-84 flex items-center justify-center fixed bottom-12 right-12 p-4"
-        >Top</a
-      >
+          <h1 class="text-4xl md:text-5xl font-bold text-white">
+            About BoosterBid
+          </h1>
+        </div>
+      </section>
+
+      <section class="max-w-4xl mx-auto px-6 py-12">
+        <h2 class="text-2xl font-semibold mb-4 text-white">Who We Are</h2>
+        <p class="mb-6 text-gray-300 leading-relaxed">
+          BoosterBid was founded in 2020 by a small team passionate about online
+          auctions. Today, we’ve grown into a global auction house with
+          dedicated employees committed to making buying and selling easy, safe,
+          and exciting. We offer
+          <span class="font-semibold text-white">worldwide shipping</span>, fast
+          customer support, and a secure system for both buyers and sellers. Our
+          core values are fairness, transparency, and user-friendliness.
+        </p>
+
+        <h2 class="text-2xl font-semibold mb-4 text-white">Rules</h2>
+        <ul class="list-disc list-inside space-y-2 text-gray-300">
+          <li>
+            You must always bid at least
+            <span class="font-semibold text-white">1 credit higher</span> than
+            the current bid.
+          </li>
+          <li>All bids are binding and cannot be withdrawn.</li>
+          <li>
+            Auction winners must
+            <span class="font-semibold text-white"
+              >complete the purchase within 48 hours</span
+            >.
+          </li>
+          <li>
+            Worldwide shipping is available – shipping costs are covered by the
+            buyer unless stated otherwise.
+          </li>
+          <li>Only registered and verified accounts can place bids.</li>
+        </ul>
+      </section>
     </main>
 
     <!-- Footer -->

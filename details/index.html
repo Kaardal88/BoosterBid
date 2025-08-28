@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BoosterBid | Details</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/js/utilities/menu.js" defer></script>
+    <script src="/js/app.js" type="module"></script>
+  </head>
+  <body
+    class="relative bg-[url('/images/BB_bg_img.jpg')] bg-cover bg-center font-sans w-full min-h-screen flex flex-col text-white"
+  >
+    <!-- Header -->
+    <header class="bg-black sticky top-0 z-50">
+      <div
+        class="container mx-auto px-4 py-4 flex items-center justify-between"
+      >
+        <!-- Logo Placeholder -->
+        <div class="text-2xl font-bold text-gray-800">
+          <a href="/index.html">
+            <img src="/images/BB_logo.png" alt="Logo" class="w-64 h-auto" />
+          </a>
+        </div>
+
+        <!-- Search, Login, Register, Hamburger -->
+        <div class="flex items-center space-x-4">
+          <a id="my-profile-link" href="/profile/index.html">
+            <img
+              id="header-avatar"
+              src="https://placehold.co/32"
+              alt="My profile"
+              class="w-8 h-8 rounded-full border-2 border-white shadow-lg"
+            />
+          </a>
+          <div class="relative flex items-center">
+            <input
+              type="text"
+              placeholder="Søk auksjoner..."
+              class="border rounded-l-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 w-32 sm:w-40"
+            />
+            <button
+              class="bg-primary hover:bg-primaryBtnHover 0 text-white rounded-r-md py-2 px-4"
+            >
+              Søk
+            </button>
+          </div>
+          <a
+            href="/register"
+            class="bg-blue-500 hover:bg-blue-600 text-white rounded-md py-2 px-4 hidden sm:block"
+            >Registrer</a
+          >
+          <!-- Hamburger Menu -->
+          <button id="hamburger" class="text-gray-600 focus:outline-none">
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16m-7 6h7"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <!-- Navigation Menu -->
+      <nav id="nav-menu" class="hidden bg-white shadow-md p-4">
+        <div class="flex flex-col space-y-2">
+          <a
+            href="/login"
+            class="bg-green-400 hover:bg-green-600 text-gray-800 rounded-md py-2 px-4 sm:hidden"
+            >Log in</a
+          >
+          <a
+            href="/register"
+            class="bg-blue-500 hover:bg-blue-600 text-white rounded-md py-2 px-4 sm:hidden"
+            >Register</a
+          >
+          <a href="#" class="text-gray-600 hover:text-blue-600 py-2">Home</a>
+          <a href="#" class="text-gray-600 hover:text-blue-600 py-2">About</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 flex-grow">
+      <div id="details-container" class="max-w-3xl mx-auto"></div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Contact</h3>
+            <p>E-mail: kontakt@auksjon.no</p>
+            <p>Phone: +47 123 45 678</p>
+            <p>Address: Auksjonsgata 1, Oslo</p>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold mb-4">FAQ</h3>
+            <a href="#" class="block text-gray-300 hover:text-white py-1"
+              >How do I make a bid?</a
+            >
+            <a href="#" class="block text-gray-300 hover:text-white py-1"
+              >Bid rules</a
+            >
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Info</h3>
+            <a href="#" class="block text-gray-300 hover:text-white py-1"
+              >About</a
+            >
+          </div>
+        </div>
+        <div class="mt-8 text-center text-gray-400">
+          © 2025 BoosterBid. All rights reserved.
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

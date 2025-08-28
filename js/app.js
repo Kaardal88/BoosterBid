@@ -1,58 +1,95 @@
+//Events
 import { loginHandler } from "./events/loginHandler.js";
 import { registerHandler } from "./events/registerHandler.js";
-/* import { viewPostsHandler } from "./events/viewPostsHandler.js"; */
-/* import { createPostHandler } from "./events/createPostHandler.js"; */
-/* import { viewPersonalPostsHandler } from "./events/viewPersonalPostsHandler.js"; */
-/* import { logoutListener } from "./events/logoutHandler.js"; */
-/* import { viewSinglePostHandler } from "./events/viewSinglePostHandler.js"; */
-/* import editPostHandler from "./events/editPostHandler.js"; */
-/* import { searchPostsHandler } from "./events/searchPostsHandler.js"; */
+import { creditsHandler } from "./events/creditsHandler.js";
 
-function router() {
-  const pathname = window.location.pathname;
-  console.log("pathname", pathname);
+import { logoutListener } from "./events/logoutHandler.js";
+import { auctionDetailsHandler } from "./events/auctionDetailsHandler.js";
+import { searchIndexHandler } from "./events/searchIndexHandler.js";
+import { homeIndexHandler } from "./events/homeIndexHandler.js";
 
+//UI
+import { renderProfile } from "./ui/renderProfile.js";
+import { initHeaderProfile } from "./ui/headerProfile.js";
+
+//Storage
+import { getName } from "./events/auth/storage.js";
+
+document.addEventListener("DOMContentLoaded", () => {
+  router();
+  initHeaderProfile();
+});
+function setFavicon(path = "/images/BB_logo.png") {
+  const link =
+    document.querySelector("link[rel*='icon']") ||
+    document.createElement("link");
+  link.type = "image/x-icon";
+  link.rel = "shortcut icon";
+  link.href = path;
+  document.getElementsByTagName("head")[0].appendChild(link);
+}
+function normalizePath(pathname) {
+  if (pathname.length > 1 && pathname.endsWith("/"))
+    return pathname.slice(0, -1);
+  return pathname;
+}
+export function router() {
+  const pathname = normalizePath(window.location.pathname);
   switch (pathname) {
+    case "":
     case "/":
-    case "/index.html":
+    case "/index.html": {
+      homeIndexHandler();
+      searchIndexHandler();
       break;
-
-    case "/register/":
-    case "/register/index.html":
-      registerHandler();
-      break;
-
-    case "/login/":
-    case "/login/index.html":
+    }
+    case "/login":
+    case "/login/index.html": {
       loginHandler();
       break;
-
-    case "/feed/":
-    case "/feed/index.html":
-      /* viewPostsHandler();
-      createPostHandler();
-      searchPostsHandler(); */
+    }
+    case "/register":
+    case "/register/index.html": {
+      registerHandler();
       break;
-
+    }
+    case "/details":
+    case "/details/index.html": {
+      auctionDetailsHandler();
+      initHeaderProfile();
+      break;
+    }
     case "/profile/":
     case "/profile/index.html":
-      /* viewPersonalPostsHandler();
-      logoutListener(); */
+      {
+        initHeaderProfile();
+        creditsHandler();
+        logoutListener();
+        const profileContainer = document.getElementById("profile-container");
+        if (profileContainer) {
+          const urlName = new URLSearchParams(window.location.search).get(
+            "name",
+          );
+          const fallbackName = getName("username");
+          renderProfile(profileContainer, urlName || fallbackName, {
+            listings: true,
+            wins: true,
+          });
+        } else {
+          console.error("Container not found for renderProfile");
+        }
+      }
       break;
-
-    case "/post-detail/":
-    case "/post-detail/index.html":
-      /* viewSinglePostHandler(); */
+    case "/user":
+    case "/user/index.html": {
       break;
-
-    case "/edit-post/":
-    case "/edit-post/index.html":
-      /* editPostHandler(); */
-      break;
-
-    default:
+    }
+    default: {
       console.warn("No route matched for:", pathname);
+    }
   }
 }
-
-router();
+document.addEventListener("DOMContentLoaded", () => {
+  router();
+  setFavicon();
+});

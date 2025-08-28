@@ -30,6 +30,10 @@ export function saveToken(token) {
   localStorage.setItem("token", token);
 }
 
+export function getName() {
+  return load("username");
+}
+
 export function load(key) {
   const value = localStorage.getItem(key);
 
