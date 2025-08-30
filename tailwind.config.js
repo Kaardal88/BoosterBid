@@ -3,6 +3,9 @@ export default {
   content: ["./**/*.{html,js}", "!./node_modules/**/*"],
   theme: {
     extend: {
+      fontFamily: {
+        main: ["Quicksand", "sans-serif"],
+      },
       colors: {
         primary: "#4D897F",
         secondary: "#FF7F50",

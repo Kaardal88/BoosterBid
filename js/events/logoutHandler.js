@@ -11,7 +11,7 @@ export function logoutHandler() {
 
 export function logoutListener() {
   document.addEventListener("click", function (event) {
-    if (event.target.closest("#logout")) {
+    if (event.target.closest("#logout-btn")) {
       logoutHandler();
     }
   });

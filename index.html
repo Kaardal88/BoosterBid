@@ -4,70 +4,40 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BoosterBid | Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="/css/style.css" />
     <script src="/js/utilities/menu.js" defer></script>
     <script src="/js/app.js" type="module"></script>
     <script src="/js/utils/scrollBehavior.js" defer></script>
   </head>
   <body
-    class="relative bg-[url('/images/BB_bg_img.jpg')] bg-cover bg-center font-sans w-full min-h-screen flex flex-col"
+    class="relative bg-[url('/images/BB_bg_img.jpg')] bg-cover bg-center font-main w-full min-h-screen flex flex-col"
   >
-    <!-- Header -->
-    <header class="bg-black sticky top-0 z-50">
+    <header
+      class="bg-black/90 backdrop-blur fixed top-0 z-50 w-full h-16 lg:h-20"
+    >
       <div
-        class="container mx-auto px-4 py-4 flex items-center justify-between"
+        class="container mx-auto px-4 flex items-center justify-between gap-3"
       >
-        <!-- Logo Placeholder -->
-        <div class="text-2xl font-bold text-gray-800">
-          <a href="/index.html">
-            <img src="/images/BB_logo.png" alt="Logo" class="w-64 h-auto" />
-          </a>
-        </div>
-
-        <!-- Search, Login, Register, Hamburger -->
-        <div class="flex items-center space-x-4">
-          <div class="relative flex items-center">
-            <a id="my-profile-link" href="/profile/index.html">
-              <img
-                id="header-avatar"
-                src="https://placehold.co/32"
-                alt="Min profil"
-                class="w-8 h-8 rounded-full border-2 border-white shadow-lg"
-              />
-            </a>
-          </div>
-          <div class="relative flex items-center">
-            <input
-              id="search-input"
-              type="text"
-              placeholder="Search auctions..."
-              class="border rounded-l-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 w-32 sm:w-40"
-            />
-            <button
-              id="search-btn"
-              class="bg-secondary hover:bg-primaryBtnHover text-black hover:text-white rounded-r-md py-2 px-4"
-            >
-              Search
-            </button>
-          </div>
-          <a
-            href="/login/index.html"
-            class="bg-primary hover:bg-primaryBtnHover text-white rounded-md py-2 px-4 hidden sm:block"
-            >Log in</a
+        <div class="flex items-center gap-3 shrink-0">
+          <button
+            id="hamburger"
+            type="button"
+            class="sm:hidden inline-flex items-center justify-center rounded-md p-2 text-white/80 hover:text-white hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+            aria-controls="nav-menu"
+            aria-expanded="false"
           >
-          <a
-            href="/register"
-            class="bg-primary hover:bg-primaryBtnHover text-white rounded-md py-2 px-4 hidden sm:block"
-            >Register</a
-          >
-          <!-- Hamburger Menu -->
-          <button id="hamburger" class="text-gray-600 focus:outline-none">
+            <span class="sr-only">Open menu</span>
             <svg
               class="w-6 h-6"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
             >
               <path
                 stroke-linecap="round"
@@ -77,27 +47,166 @@
               ></path>
             </svg>
           </button>
+
+          <a href="/index.html" class="block shrink-0">
+            <img
+              src="/images/BB_logo.png"
+              alt="BoosterBid"
+              class="w-64 sm:w-40 md:w-64 lg:w-64 h-auto"
+            />
+          </a>
+        </div>
+
+        <div class="flex items-center gap-2 sm:gap-4 min-w-0">
+          <!-- Profil (vis når innlogget) -->
+          <a
+            id="my-profile-link"
+            href="/profile/index.html"
+            class="shrink-0"
+            data-auth-when="logged-in"
+          >
+            <img
+              id="header-avatar"
+              src="https://placehold.co/32"
+              alt="Min profil"
+              class="w-8 h-8 sm:w-9 sm:h-9 rounded-full border-2 border-white shadow-lg object-cover"
+            />
+          </a>
+
+          <!-- Søk (vises inline fra md+) -->
+          <div class="hidden md:flex items-center">
+            <input
+              id="search-input"
+              type="text"
+              placeholder="Search auctions..."
+              class="border rounded-l-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 w-48 lg:w-64"
+            />
+            <button
+              id="search-btn"
+              type="button"
+              class="bg-primary hover:bg-primaryBtnHover text-white rounded-r-md py-2 px-4"
+            >
+              Search
+            </button>
+          </div>
+
+          <!-- Auth CTAs (desktop, vis når utlogget) -->
+          <a
+            href="/login/index.html"
+            data-auth-when="logged-out"
+            class="hidden sm:block bg-primary hover:bg-primaryBtnHover text-white rounded-md py-2 px-4"
+          >
+            Log in
+          </a>
+          <a
+            href="/register"
+            data-auth-when="logged-out"
+            class="hidden sm:block bg-primary hover:bg-primaryBtnHover text-white rounded-md py-2 px-4"
+          >
+            Register
+          </a>
         </div>
       </div>
-      <!-- Navigation Menu -->
-      <nav id="nav-menu" class="hidden bg-primary/30 shadow-md p-4">
-        <div class="flex flex-col justify-center items-center space-y-2">
-          <a href="/index.html" class="text-white hover:focus-ring py-2"
-            >Home</a
-          >
 
-          <a
-            href="/about/index.html"
-            class="text-gray-600 hover:text-blue-600 py-2"
-            >About us</a
+      <!-- Mobilmeny -->
+      <nav
+        id="nav-menu"
+        class="hidden sm:hidden border-t border-white/10 bg-black"
+      >
+        <div class="container mx-auto px-4 py-3 space-y-3">
+          <div class="flex">
+            <input
+              id="search-input-mobile"
+              type="text"
+              placeholder="Search auctions..."
+              class="flex-1 border rounded-l-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 min-w-0"
+            />
+            <button
+              id="search-btn-mobile"
+              type="button"
+              class="bg-primary hover:bg-primaryBtnHover text-white rounded-r-md py-2 px-4"
+            >
+              Search
+            </button>
+          </div>
+
+          <div class="flex flex-col items-center gap-2">
+            <a href="/index.html" class="text-white hover:underline py-1"
+              >Home</a
+            >
+            <a
+              href="/about/index.html"
+              class="text-white/80 hover:text-white py-1"
+              >About us</a
+            >
+          </div>
+
+          <!-- Auth knapper i mobilmenyen (vis når utlogget) -->
+          <div class="grid grid-cols-2 gap-2" data-auth-when="logged-out">
+            <a
+              href="/login/index.html"
+              class="text-center bg-primary hover:bg-primaryBtnHover text-white rounded-md py-2"
+            >
+              Log in
+            </a>
+            <a
+              href="/register"
+              class="text-center bg-primary hover:bg-primaryBtnHover text-white rounded-md py-2"
+            >
+              Register
+            </a>
+          </div>
+
+          <!-- Log out (valgfritt, vis når innlogget) -->
+          <button
+            id="logout-btn"
+            class="w-full hidden text-center bg-white/10 hover:bg-white/20 text-white rounded-md py-2"
+            data-auth-when="logged-in"
           >
+            Log out
+          </button>
         </div>
       </nav>
     </header>
+    <section class="mt-24">
+      <div
+        class="relative h-[320px] sm:h-[420px] md:h-[520px] lg:h-[980px] overflow-hidden rounded-xl"
+      >
+        <!-- Bildet fyller beholderen -->
+        <img
+          src="/images/wooden-judges-gavel-table-courtroom-enforcement-office.jpg"
+          alt="BoosterBid"
+          class="absolute inset-0 w-full h-full object-cover"
+        />
+        <!-- Valgfri mørk gradient for kontrast -->
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent"
+        ></div>
+
+        <!-- Tekstlag -->
+        <div
+          class="relative lg:mt-64 lg:ml-10 z-10 justify-center flex flex-col items-center text-white py-24 px-10"
+        >
+          <h1
+            class="mt-4 text-center font-bold leading-tight tracking-tight max-w-[24ch] text-[clamp(1.75rem,4vw+1rem,4rem)]"
+          >
+            Find your next auction. We offer a wide selection of auctions for
+            you to choose from.
+          </h1>
+          <a
+            href="#auction-container"
+            class="inline-flex items-center sm:mt-1 lg:mt-4 lg:px-5 lg:py-2 md:px-4 md:py-1.5 px-3 py-1 text-sm font-semibold rounded-md bg-primary hover:bg-primaryBtnHover"
+            >Browse auctions</a
+          >
+        </div>
+      </div>
+    </section>
 
     <!-- Main Content -->
-    <main class="container mx-auto px-4 py-8 flex-grow">
-      <h1 class="text-3xl font-bold mb-6 text-white">Active auctions</h1>
+    <main class="container mx-auto px-4 py-8 mt-24 flex-grow">
+      <h1 class="lg:text-3xl font-bold mb-6 text-white text-center sm:text-sm">
+        Auctions
+      </h1>
       <div class="mb-4 flex items-center gap-3">
         <label for="filter-status" class="text-sm text-gray-200">Filter</label>
         <select id="filter-status" class="border rounded p-2 text-black">
