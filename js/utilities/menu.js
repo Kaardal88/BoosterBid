@@ -53,7 +53,7 @@
   applyAuthVisibility();
 
   // (Valgfritt) Koble til logout-knapp hvis du har en slik
-  /* const logoutBtn = qs("#logout-btn");
+  /*  const logoutBtn = qs("#logout-btn");
   if (logoutBtn) {
     logoutBtn.addEventListener("click", () => {
       // Kall din faktiske logout! Her er en defensiv fallback:
@@ -61,7 +61,7 @@
         localStorage.removeItem("accessToken");
         localStorage.removeItem("token");
         localStorage.removeItem("auth");
-        localStorage.removeItem("user");
+        localStorage.removeItem("username");
       } catch {
         applyAuthVisibility();
         // Lukk meny

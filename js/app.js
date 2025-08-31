@@ -41,6 +41,7 @@ export function router() {
     case "/index.html": {
       homeIndexHandler();
       searchIndexHandler();
+      logoutListener();
       break;
     }
     case "/login":
