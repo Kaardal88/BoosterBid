@@ -22,11 +22,6 @@ export async function auctionDetailsHandler() {
   try {
     const data = await getListingById(id, { bids: true, seller: true });
 
-    console.group("[Details] Listing data");
-    console.log("ID:", id);
-    console.log(data);
-    console.groupEnd();
-
     if (!data || typeof data !== "object") {
       container.innerHTML = `<p class="text-red-600">Invalid listing data</p>`;
       return;
@@ -111,12 +106,13 @@ export async function auctionDetailsHandler() {
       renderBidBox(bidContainer, data, userCredits);
     }
   } catch (err) {
-    console.error(err);
     const msg = String(err.message || err);
     const human = msg.includes("(404)")
       ? "Did not find listing. Try again."
       : "Could not load listing. Try again.";
-    container.innerHTML = `<p class="text-red-600">${human}</p><pre class="text-xs text-gray-500">${msg}</pre>`;
+    container.innerHTML = `<p class="text-red-600 text-center">${human}</p><pre class="text-sm text-gray-200 text-center mx-auto whitespace-pre-wrap break-words max-w-max bg-gray-800 p-2 rounded">
+  ${msg}
+</pre>`;
   }
 }
 

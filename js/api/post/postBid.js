@@ -3,19 +3,17 @@ import { API_KEY } from "../config.js";
 import { getToken, getName } from "../../events/auth/storage.js";
 
 export async function postBid(listingId, amount) {
-  const url = `${BASE_URL}${ENDPOINTS.placeBids.replace("{name}", listingId)}`; // Fiks: bruk placeBids
+  const url = `${BASE_URL}${ENDPOINTS.placeBids.replace("{name}", listingId)}`;
 
   const token = getToken();
   if (!token) {
-    throw new Error("Ingen token funnet. Logg inn på nytt.");
+    throw new Error("No token found. Please log in.");
   }
 
   const bidData = {
     amount: parseFloat(amount),
-    bidderName: getName(), // Legg til brukernavn fra storage.js
+    bidderName: getName(),
   };
-
-  console.log("Sender bud til:", url, "med data:", bidData); // Legg til for feilsøking
 
   const options = {
     method: "POST",
@@ -31,11 +29,11 @@ export async function postBid(listingId, amount) {
 
   if (!response.ok) {
     const json = await response.json();
-    console.error("API-feil:", json); // Logg hele feilen
-    throw new Error(json.errors?.[0]?.message || "Kunne ikke legge inn bud");
+    console.error("API-error:", json);
+    throw new Error(json.errors?.[0]?.message || "Could not place bid");
   }
 
   const data = await response.json();
-  console.log("Bud respons:", data); // Logg responsen
+
   return { success: true, data };
 }

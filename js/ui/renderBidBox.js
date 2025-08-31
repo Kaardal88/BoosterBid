@@ -8,8 +8,8 @@ export function renderBidBox(container, listing, userCredits = null) {
   const token = getToken();
   if (!token) {
     container.innerHTML = `
-      <div class="bg-red-100 border border-red-300 text-red-800 p-4 rounded">
-        <p class="mb-2">
+      <div class="bg-red-100 border border-red-300 text-red-800 p-4 rounded text-center ">
+        <p class="mb-2 ">
           You are not logged in. Please
           <a href="/login/index.html?redirect=${encodeURIComponent(location.pathname + location.search)}"
              class="underline text-blue-700 hover:text-blue-900">log in</a>
@@ -59,10 +59,10 @@ export function renderBidBox(container, listing, userCredits = null) {
       if (userCredits != null) {
         userCredits -= value;
         if (creditsDisplay)
-          creditsDisplay.textContent = `Dine credits: ${userCredits}`;
+          creditsDisplay.textContent = `Your credits: ${userCredits}`;
       }
     } catch (err) {
-      msg.textContent = err.message || "Kunne ikke legge inn bud.";
+      msg.textContent = err.message || "Could not send bid.";
       msg.className = "text-red-600 text-sm";
     }
   });
