@@ -62,10 +62,11 @@ export function router() {
     }
     case "/profile/":
     case "/profile/index.html":
+      logoutListener();
       {
         initHeaderProfile();
         creditsHandler();
-        logoutListener();
+
         const profileContainer = document.getElementById("profile-container");
         if (profileContainer) {
           const urlName = new URLSearchParams(window.location.search).get(

@@ -5,8 +5,6 @@ export function logoutHandler() {
 
   window.location.href = "/login/index.html";
   history.replaceState(null, "", "/index.html");
-
-  console.log("User logged out locally.");
 }
 
 export function logoutListener() {
