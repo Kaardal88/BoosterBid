@@ -9,6 +9,6 @@ export async function profileHandler() {
     renderProfile(mount);
   } catch (err) {
     console.error(err);
-    mount.innerHTML = `<p class="error">Kunne ikke laste profilen.</p>`;
+    mount.innerHTML = `<p class="error">Could not load profile</p>`;
   }
 }

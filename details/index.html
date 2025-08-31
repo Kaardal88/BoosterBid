@@ -53,7 +53,7 @@
         </div>
 
         <div class="flex items-center gap-2 sm:gap-4 min-w-0">
-          <!-- Profil (vis når innlogget) -->
+          <!-- Profile -->
           <a
             id="my-profile-link"
             href="/profile/index.html"
@@ -67,26 +67,9 @@
               class="w-8 h-8 sm:w-9 sm:h-9 rounded-full border-2 border-white shadow-lg object-cover"
             />
           </a>
-
-          <!-- Auth CTAs (desktop, vis når utlogget) -->
-          <!-- <a
-            href="/login/index.html"
-            data-auth-when="logged-out"
-            class="hidden sm:block bg-primary hover:bg-primaryBtnHover text-white rounded-md py-2 px-4"
-          >
-            Log in
-          </a>
-          <a
-            href="/register"
-            data-auth-when="logged-out"
-            class="hidden sm:block bg-primary hover:bg-primaryBtnHover text-white rounded-md py-2 px-4"
-          >
-            Register
-          </a> -->
         </div>
       </div>
-
-      <!-- Mobilmeny -->
+      <!-- Mobile menu -->
       <nav id="nav-menu" class="hidden border-t border-white/10 bg-black">
         <div class="container mx-auto px-4 py-3 space-y-3">
           <div class="flex flex-col items-center gap-2">
@@ -99,8 +82,7 @@
               >About us</a
             >
           </div>
-
-          <!-- Auth knapper i mobilmenyen (vis når utlogget) -->
+          <!-- Auth  -->
           <div class="grid grid-cols-2 gap-2" data-auth-when="logged-out">
             <a
               href="/login/index.html"
@@ -115,8 +97,7 @@
               Register
             </a>
           </div>
-
-          <!-- Log out (valgfritt, vis når innlogget) -->
+          <!-- Log out -->
           <button
             id="logout-btn"
             class="w-full hidden text-center bg-white/10 hover:bg-white/20 text-white rounded-md py-2"
@@ -139,12 +120,11 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <h3 class="text-lg font-semibold mb-4">Contact</h3>
-            <p>E-mail: kontakt@auksjon.no</p>
+            <p>E-mail: contact@auction.no</p>
             <p>Phone: +47 123 45 678</p>
-            <p>Address: Auksjonsgata 1, Oslo</p>
+            <p>Address: Auksjonsgata 1, Bergen</p>
           </div>
           <div>
-            <h3 class="text-lg font-semibold mb-4">FAQ</h3>
             <a href="#" class="block text-gray-300 hover:text-white py-1"
               >How do I make a bid?</a
             >

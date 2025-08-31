@@ -40,11 +40,11 @@ export async function renderProfile(
   const paramsName = new URLSearchParams(window.location.search).get("name");
   const viewedName = username || paramsName;
   if (!viewedName) {
-    container.innerHTML = `<div class="profile profile--error"><p>Mangler brukernavn (?name=...)</p></div>`;
+    container.innerHTML = `<div class="profile profile--error"><p>Missing username (?name=...)</p></div>`;
     return;
   }
 
-  container.innerHTML = `<div class="profile profile--loading">Laster profil…</div>`;
+  container.innerHTML = `<div class="profile profile--loading">Loading profile...</div>`;
 
   try {
     const data = await getProfile(viewedName, opts);
@@ -76,10 +76,8 @@ export async function renderProfile(
     `;
     initImageModal(container, ".js-image-modal");
 
-    // Bio editor (skjult bak “Edit bio”-knapp) – kun eier
     const bioSectionHTML = iAmOwner ? renderProfileBio(data) : "";
 
-    // Avatar/Banner‑editor – kun eier
     const ownerEditorHTML = !iAmOwner
       ? ""
       : `
@@ -104,7 +102,7 @@ export async function renderProfile(
       </section>
     `;
 
-    // LISTINGS fra API (den offentlige seksjonen)
+    // LISTINGS
     const listingsHTML = Array.isArray(data?.listings)
       ? `
       <section class="profile__section bg-primary/20 p-4 rounded">
@@ -118,11 +116,11 @@ export async function renderProfile(
             <li class="card">
               <img class="card__img" src="${img}" alt="${alt}">
               <div class="card__body">
-                <h3 class="card__title">${l?.title ?? "Uten tittel"}</h3>
+                <h3 class="card__title">${l?.title ?? "Untitled"}</h3>
                 <p class="card__text">${l?.description ?? ""}</p>
                 <p class="card__meta">
-                  <span>Opprettet: ${formatDate(l?.created)}</span>
-                  <span>Slutter: ${formatDate(l?.endsAt)}</span>
+                  <span>Created: ${formatDate(l?.created)}</span>
+                  <span>Ends: ${formatDate(l?.endsAt)}</span>
                 </p>
               </div>
             </li>`;
@@ -170,10 +168,8 @@ export async function renderProfile(
     `
       : "";
 
-    // “Mine listings” (skjema + egne kort) – kun eier
     const myListingsHTML = iAmOwner ? renderProfileMyListings(data) : "";
 
-    // SETT ALT I DOM — header først, så bio‑seksjonen, deretter editorer/listings
     container.innerHTML = `
       <article class="profile space-y-8">
         ${headerHTML}
@@ -185,12 +181,8 @@ export async function renderProfile(
       </article>
     `;
 
-    // === INIT etter render ===
     if (iAmOwner) {
-      // Bio (toggle + submit)
-      initProfileBio(container, data.name, () => {
-        /* onSaved optional */
-      });
+      initProfileBio(container, data.name, () => {});
 
       // Avatar
       const avatarForm = container.querySelector("#avatar-form");
@@ -201,12 +193,12 @@ export async function renderProfile(
         const msg = container.querySelector("#avatar-msg");
         msg.textContent = "";
         if (!url || !isValidHttpUrl(url)) {
-          msg.textContent = "Ugyldig URL.";
+          msg.textContent = "Invalid URL.";
           msg.className = "text-red-600 text-sm";
           return;
         }
         try {
-          msg.textContent = "Lagrer…";
+          msg.textContent = "Saving…";
           msg.className = "text-gray-600 text-sm";
           const updated = await updateProfile(data.name, {
             avatar: { url, ...(alt ? { alt } : {}) },
@@ -216,10 +208,10 @@ export async function renderProfile(
             img.src = updated?.avatar?.url || url;
             img.alt = updated?.avatar?.alt || alt || img.alt;
           }
-          msg.textContent = "Avatar oppdatert ✔";
+          msg.textContent = "Avatar updated ✔";
           msg.className = "text-green-700 text-sm";
         } catch (err) {
-          msg.textContent = err.message || "Kunne ikke oppdatere avatar";
+          msg.textContent = err.message || "Could not update avatar.";
           msg.className = "text-red-600 text-sm";
         }
       });
@@ -233,12 +225,12 @@ export async function renderProfile(
         const msg = container.querySelector("#banner-msg");
         msg.textContent = "";
         if (!url || !isValidHttpUrl(url)) {
-          msg.textContent = "Ugyldig URL.";
+          msg.textContent = "Invalid URL.";
           msg.className = "text-red-600 text-sm";
           return;
         }
         try {
-          msg.textContent = "Lagrer…";
+          msg.textContent = "Saving…";
           msg.className = "text-gray-600 text-sm";
           const updated = await updateProfile(data.name, {
             banner: { url, ...(alt ? { alt } : {}) },
@@ -253,15 +245,15 @@ export async function renderProfile(
           } else {
             banner.src = updated?.banner?.url || url;
           }
-          msg.textContent = "Header oppdatert ✔";
+          msg.textContent = "Header updated ✔";
           msg.className = "text-green-700 text-sm";
         } catch (err) {
-          msg.textContent = err.message || "Kunne ikke oppdatere header";
+          msg.textContent = err.message || "Could not update header";
           msg.className = "text-red-600 text-sm";
         }
       });
 
-      // Mine listings – ÉN init med callback som re‑rendrer
+      //My listings
       initProfileMyListings(container, async () => {
         const fresh = await getProfile(data.name, {
           listings: true,
@@ -274,8 +266,8 @@ export async function renderProfile(
     console.error(err);
     container.innerHTML = `
       <div class="profile profile--error">
-        <h2>Kunne ikke hente profilen «${viewedName}»</h2>
-        <p>${err.message || "Ukjent feil"}</p>
+        <h2>Could not load «${viewedName}»</h2>
+        <p>${err.message || "Unexpected error"}</p>
       </div>`;
   }
 }

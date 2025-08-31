@@ -8,14 +8,10 @@ function joinUrl(base, path) {
   return `${b}/${p}`;
 }
 
-/**
- * Oppdater en eksisterende listing (PUT = full oppdatering; PATCH kan også brukes)
- * body: valgfri subset av { title, description, tags, media, endsAt }
- */
 export async function updateListing(id, body) {
-  if (!id) throw new Error("updateListing: mangler id");
+  if (!id) throw new Error("updateListing: missing id");
   const token = getToken();
-  if (!token) throw new Error("Du må være innlogget.");
+  if (!token) throw new Error("You are not logged in.");
 
   const path = ENDPOINTS.singleListing.replace("{id}", encodeURIComponent(id));
   const url = joinUrl(BASE_URL, path);
@@ -32,7 +28,7 @@ export async function updateListing(id, body) {
   const text = await res.text();
   if (!res.ok)
     throw new Error(
-      `Kunne ikke oppdatere listing (${res.status}): ${text.slice(0, 200)}`,
+      `Could not update listing (${res.status}): ${text.slice(0, 200)}`,
     );
   const json = text ? JSON.parse(text) : null;
   return json?.data ?? json;

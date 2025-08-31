@@ -1,7 +1,7 @@
 import { createListing } from "../../api/listings/createListing.js";
 import { updateListing } from "../../api/listings/updateListing.js";
 import { deleteListing } from "../../api/listings/deleteListing.js";
-import { getName } from "../../events/auth/storage.js"; // NB: sti opp to nivå fra /ui/profile/
+import { getName } from "../../events/auth/storage.js";
 
 export function renderProfileMyListings(data) {
   const myListings = Array.isArray(data?.listings) ? data.listings : [];
@@ -17,7 +17,7 @@ export function renderProfileMyListings(data) {
         <input id="cl-media-url" class="border rounded p-2 text-black" type="url" placeholder="Image URL (optional)">
         <input id="cl-media-alt" class="border rounded p-2 text-black" type="text" placeholder="Image alt-text (optional)">
         <label class="text-sm text-white-600">End date (local time)</label>
-        <input id="cl-ends" class="border rounded p-2" type="datetime-local" required>
+        <input id="cl-ends" class="border rounded text-black p-2" type="datetime-local" required>
         <button class="bg-primary hover:bg-primaryBtnHover text-white font-semibold rounded px-4 py-2">Publish</button>
         <p id="cl-msg" class="text-sm mt-1"></p>
       </form>
@@ -126,7 +126,7 @@ export function initProfileMyListings(container, onAfterChange) {
         await deleteListing(id);
         onAfterChange?.();
       } catch (err) {
-        alert(err.message || "Cpuld not delete.");
+        alert(err.message || "Could not delete.");
       } finally {
         btn.disabled = false;
         btn.textContent = "Delete";
@@ -160,7 +160,7 @@ export function initProfileMyListings(container, onAfterChange) {
         await updateListing(id, body);
         onAfterChange?.();
       } catch (err) {
-        alert(err.message || "Cpuld not update.");
+        alert(err.message || "Could not update.");
       } finally {
         btn.disabled = false;
         btn.textContent = "Edit";
