@@ -58,6 +58,7 @@ export function router() {
     case "/details/index.html": {
       auctionDetailsHandler();
       initHeaderProfile();
+      logoutListener();
       break;
     }
     case "/profile/":
@@ -82,8 +83,9 @@ export function router() {
         }
       }
       break;
-    case "/user":
-    case "/user/index.html": {
+    case "/about":
+    case "/about/index.html": {
+      logoutListener();
       break;
     }
     default: {
