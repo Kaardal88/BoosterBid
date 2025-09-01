@@ -1,5 +1,4 @@
-// js/ui/renderProfileBio.js
-import { updateBio } from "../api/profiles/updateBio.js"; // eller updateProfile({ bio })
+import { updateBio } from "../api/profiles/updateBio.js";
 import { initBioToggle } from "../utils/toggleBio.js";
 
 export function renderProfileBio(data) {
@@ -11,10 +10,9 @@ export function renderProfileBio(data) {
               aria-expanded="false">
         Edit bio
       </button>
-
-      <form id="bio-form" class="hidden bg-primary/20 p-4 rounded shadow grid gap-3 w-full">
+<form id="bio-form" class="hidden bg-primary/20 p-4 rounded shadow  gap-3 w-full">
         <textarea id="bio-text"
-                  class="border text-black rounded p-2 min-h-28"
+                  class="border text-black rounded p-2 min-h-28 w-full"
                   maxlength="500"
                   placeholder="Write your bio (Max 500 characters)">${escapeHTML(current)}</textarea>
         <div class="flex items-center gap-3">
@@ -28,28 +26,18 @@ export function renderProfileBio(data) {
     </section>
   `;
 }
-
-// Koble toggle + submit etter at HTML er i DOM
 export function initProfileBio(container, username, onSaved) {
-  // Scope til bio-seksjonen
   const section = container.querySelector("#bio-section");
   if (!section) return;
-
-  // 1) Toggle
   initBioToggle(section);
-
-  // 2) Tellerscript + submit
   const form = section.querySelector("#bio-form");
   const textarea = section.querySelector("#bio-text");
   const count = section.querySelector("#bio-count");
   const msg = section.querySelector("#bio-msg");
-
   if (!form || !textarea) return;
-
   textarea.addEventListener("input", () => {
     if (count) count.textContent = `${textarea.value.length}/500`;
   });
-
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const value = textarea.value.trim();
@@ -57,9 +45,7 @@ export function initProfileBio(container, username, onSaved) {
     try {
       msg.textContent = "Saving…";
       msg.className = "text-gray-700 text-sm";
-      const updated = await updateBio(username, { bio: value }); // eller updateProfile(username, { bio: value })
-
-      // Oppdater bio-teksten i headeren (legg til om den mangler)
+      const updated = await updateBio(username, { bio: value });
       let bioP = container.querySelector(".profile__bio");
       if (!bioP) {
         const header = container.querySelector(".profile__header");
@@ -70,7 +56,6 @@ export function initProfileBio(container, username, onSaved) {
         bioP = container.querySelector(".profile__bio");
       }
       if (bioP) bioP.textContent = updated?.bio ?? value;
-
       msg.textContent = "Bio updated ✔";
       msg.className = "text-green-700 text-sm";
       onSaved?.(updated);
@@ -80,7 +65,6 @@ export function initProfileBio(container, username, onSaved) {
     }
   });
 }
-
 function escapeHTML(s = "") {
   return s.replace(
     /[&<>"']/g,
