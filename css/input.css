@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  h1 {
+    @apply font-bold leading-tight tracking-tight text-[clamp(1.75rem,4vw+1rem,4rem)];
+  }
+}

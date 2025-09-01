@@ -3,15 +3,51 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="View and manage your profile on BoosterBid. Check your active bids, won auctions, and account settings."
+    />
+
+    <meta
+      name="keywords"
+      content="auction, bidding, buy, sell, online marketplace"
+    />
+    <meta name="author" content="Kim-André Kårdal" />
+    <meta property="og:title" content="BoosterBid | Online Auctions" />
+    <meta
+      property="og:description"
+      content="Join BoosterBid and start bidding on exclusive items today!"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://boosterbid.netlify.app" />
+    <meta
+      property="og:image"
+      content="https://boosterbid.netlify.app/images/BB_logo.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="BoosterBid | Online Auctions" />
+    <meta
+      name="twitter:description"
+      content="Join BoosterBid and start bidding on exclusive items today!"
+    />
+    <meta
+      name="twitter:image"
+      content="https://boosterbid.netlify.app/images/BB_logo.png"
+    />
     <title>Boosterbid | Profile</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="/css/style.css" />
     <script src="/js/utilities/menu.js" defer></script>
     <script src="/js/app.js" type="module"></script>
   </head>
   <body
-    class="relative bg-[url('/images/BB_bg_img.jpg')] bg-cover bg-center font-sans w-full min-h-screen flex flex-col text-white"
+    class="relative bg-[url('/images/BB_bg_img.jpg')] bg-cover bg-center font-main w-full min-h-screen flex flex-col text-white"
   >
-    <!-- Header -->
     <header
       class="bg-black/90 backdrop-blur fixed top-0 z-50 w-full h-16 lg:h-20"
     >
@@ -41,7 +77,6 @@
               ></path>
             </svg>
           </button>
-
           <a href="/index.html" class="block shrink-0">
             <img
               src="/images/BB_logo.png"
@@ -50,9 +85,7 @@
             />
           </a>
         </div>
-
         <div class="flex items-center gap-2 sm:gap-4 min-w-0">
-          <!-- Profil (vis når innlogget) -->
           <a
             id="my-profile-link"
             href="/profile/index.html"
@@ -66,42 +99,8 @@
               class="w-8 h-8 sm:w-9 sm:h-9 rounded-full border-2 border-white shadow-lg object-cover"
             />
           </a>
-
-          <!-- Søk (vises inline fra md+) -->
-          <!-- <div class="hidden md:flex items-center">
-            <input
-              id="search-input"
-              type="text"
-              placeholder="Search auctions..."
-              class="border rounded-l-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 w-48 lg:w-64"
-            />
-            <button
-              id="search-btn"
-              type="button"
-              class="bg-primary hover:bg-primaryBtnHover text-white rounded-r-md py-2 px-4"
-            >
-              Search
-            </button>
-          </div> -->
-
-          <!-- Auth CTAs (desktop, vis når utlogget) -->
-          <!--  <a
-            href="/login/index.html"
-            data-auth-when="logged-out"
-            class="hidden sm:block bg-primary hover:bg-primaryBtnHover text-white rounded-md py-2 px-4"
-          >
-            Log in
-          </a>
-          <a
-            href="/register"
-            data-auth-when="logged-out"
-            class="hidden sm:block bg-primary hover:bg-primaryBtnHover text-white rounded-md py-2 px-4"
-          >
-            Register
-          </a> -->
         </div>
       </div>
-      <!-- Mobilmeny -->
       <nav id="nav-menu" class="hidden border-t border-white/10 bg-black">
         <div class="container mx-auto px-4 py-3 space-y-3">
           <div class="flex flex-col items-center gap-2">
@@ -114,8 +113,6 @@
               >About us</a
             >
           </div>
-
-          <!-- Auth knapper i mobilmenyen (vis når utlogget) -->
           <div class="grid grid-cols-2 gap-2" data-auth-when="logged-out">
             <a
               href="/login/index.html"
@@ -130,8 +127,6 @@
               Register
             </a>
           </div>
-
-          <!-- Log out (valgfritt, vis når innlogget) -->
           <button
             id="logout-btn"
             class="w-full hidden text-center bg-white/10 hover:bg-white/20 text-white rounded-md py-2"

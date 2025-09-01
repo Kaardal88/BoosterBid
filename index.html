@@ -3,6 +3,36 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="BoosterBid is an online auction platform where you can bid, buy, and sell unique items easily."
+    />
+    <meta
+      name="keywords"
+      content="auction, bidding, buy, sell, online marketplace"
+    />
+    <meta name="author" content="Kim-André Kårdal" />
+    <meta property="og:title" content="BoosterBid | Online Auctions" />
+    <meta
+      property="og:description"
+      content="Join BoosterBid and start bidding on exclusive items today!"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://boosterbid.netlify.app" />
+    <meta
+      property="og:image"
+      content="https://boosterbid.netlify.app/images/BB_logo.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="BoosterBid | Online Auctions" />
+    <meta
+      name="twitter:description"
+      content="Join BoosterBid and start bidding on exclusive items today!"
+    />
+    <meta
+      name="twitter:image"
+      content="https://boosterbid.netlify.app/images/BB_logo.png"
+    />
     <title>BoosterBid | Home</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -47,7 +77,6 @@
               ></path>
             </svg>
           </button>
-
           <a href="/index.html" class="block shrink-0">
             <img
               src="/images/BB_logo.png"
@@ -56,9 +85,7 @@
             />
           </a>
         </div>
-
         <div class="flex items-center gap-2 sm:gap-4 min-w-0">
-          <!-- Profil (vis når innlogget) -->
           <a
             id="my-profile-link"
             href="/profile/index.html"
@@ -72,26 +99,8 @@
               class="w-8 h-8 sm:w-9 sm:h-9 rounded-full border-2 border-white shadow-lg object-cover"
             />
           </a>
-
-          <!-- Auth CTAs (desktop, vis når utlogget) -->
-          <!-- <a
-            href="/login/index.html"
-            data-auth-when="logged-out"
-            class="hidden sm:block bg-primary hover:bg-primaryBtnHover text-white rounded-md py-2 px-4"
-          >
-            Log in
-          </a>
-          <a
-            href="/register"
-            data-auth-when="logged-out"
-            class="hidden sm:block bg-primary hover:bg-primaryBtnHover text-white rounded-md py-2 px-4"
-          >
-            Register
-          </a> -->
         </div>
       </div>
-
-      <!-- Mobilmeny -->
       <nav id="nav-menu" class="hidden border-t border-white/10 bg-black">
         <div class="container mx-auto px-4 py-3 space-y-3">
           <div class="flex flex-col items-center gap-2">
@@ -104,8 +113,6 @@
               >About us</a
             >
           </div>
-
-          <!-- Auth knapper i mobilmenyen (vis når utlogget) -->
           <div class="grid grid-cols-2 gap-2" data-auth-when="logged-out">
             <a
               href="/login/index.html"
@@ -120,8 +127,6 @@
               Register
             </a>
           </div>
-
-          <!-- Log out (valgfritt, vis når innlogget) -->
           <button
             id="logout-btn"
             class="w-full hidden text-center bg-white/10 hover:bg-white/20 text-white rounded-md py-2"
@@ -136,18 +141,14 @@
       <div
         class="relative h-[320px] sm:h-[420px] md:h-[520px] lg:h-[980px] overflow-hidden rounded-xl"
       >
-        <!-- Bildet fyller beholderen -->
         <img
           src="/images/wooden-judges-gavel-table-courtroom-enforcement-office.jpg"
           alt="BoosterBid"
           class="absolute inset-0 w-full h-full object-cover"
         />
-        <!-- Valgfri mørk gradient for kontrast -->
         <div
           class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent"
         ></div>
-
-        <!-- Tekstlag -->
         <div
           class="relative lg:mt-64 lg:ml-10 z-10 justify-center flex flex-col items-center text-white py-24 px-10"
         >
@@ -160,8 +161,6 @@
         </div>
       </div>
     </section>
-
-    <!-- Main Content -->
     <main class="container mx-auto px-4 py-8 mt-24 flex-grow">
       <h1 class="lg:text-3xl font-bold mb-6 text-white text-center sm:text-sm">
         Auctions
@@ -173,8 +172,6 @@
           <option value="all">Active Listings</option>
           <option value="active">All Listings</option>
         </select>
-
-        <!-- valgfritt: enkel tag-filtrering -->
         <input
           id="filter-tag"
           type="text"
@@ -182,8 +179,6 @@
           class="border rounded p-2 text-black"
         />
         <p class="text-white">Or search</p>
-
-        <!-- Søk (vises inline fra md+) -->
         <div class="flex flex-col gap-2 md:flex-row md:items-center">
           <input
             id="search-input"
@@ -208,7 +203,6 @@
           </div>
         </div>
       </div>
-
       <div
         id="auction-container"
         class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-full overflow-x-hidden"
@@ -229,8 +223,6 @@
         >Top</a
       >
     </main>
-
-    <!-- Footer -->
     <footer class="bg-footer/20 text-white py-8 mt-40">
       <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -242,7 +234,6 @@
           </div>
           <div>
             <h3 class="text-lg font-semibold mb-4">FAQ</h3>
-
             <a
               href="/about/index.html"
               class="block text-gray-300 hover:text-white py-1"

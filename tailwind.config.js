@@ -7,10 +7,10 @@ export default {
         main: ["Quicksand", "sans-serif"],
       },
       colors: {
-        primary: "#4D897F",
+        primary: "#2B675D",
         secondary: "#FF7F50",
         accent: "#66fcf1",
-        primaryBtnHover: "#2B675D",
+        primaryBtnHover: "#1B4E45",
         footer: "#486168",
       },
     },
