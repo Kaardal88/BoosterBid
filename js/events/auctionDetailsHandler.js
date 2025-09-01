@@ -27,7 +27,7 @@ export async function auctionDetailsHandler() {
       return;
     }
 
-    const title = data.title || data.name || "Uten tittel";
+    const title = data.title || data.name || "Unknown";
     const description = data.description || "";
     const mediaArr = Array.isArray(data.media) ? data.media : [];
     const firstMedia = mediaArr[0] || {};
