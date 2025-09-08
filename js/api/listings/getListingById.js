@@ -1,4 +1,3 @@
-// js/api/listings/getListingById.js
 import { BASE_URL, ENDPOINTS } from "../endpoints.js";
 import { API_KEY } from "../config.js";
 import { getToken } from "../../events/auth/storage.js";
@@ -20,7 +19,7 @@ export async function getListingById(id, opts = { bids: true, seller: true }) {
     throw new Error(
       "You are not logged in. Missing token. Please <a href='/login' class='underline text-indigo-200'>log in</a> or <a href='/register' class='underline text-indigo-200'>register</a>.",
     );
-  // ✅ Bygg path og valider at {id} faktisk ble erstattet
+
   let path = ENDPOINTS?.singleListing;
   if (!path) throw new Error("ENDPOINTS.singleListing mangler.");
   path = path.replace("{id}", encodeURIComponent(id));
@@ -45,7 +44,7 @@ export async function getListingById(id, opts = { bids: true, seller: true }) {
     },
   });
 
-  const text = await res.text(); // les body én gang
+  const text = await res.text();
   console.debug("[getListingById] status:", res.status, res.statusText);
   console.debug("[getListingById] raw body:", text);
 
@@ -55,7 +54,6 @@ export async function getListingById(id, opts = { bids: true, seller: true }) {
     );
   }
 
-  // Prøv å parse JSON hvis mulig
   let json;
   try {
     json = text ? JSON.parse(text) : null;

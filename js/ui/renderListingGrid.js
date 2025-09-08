@@ -1,4 +1,3 @@
-// js/ui/listings/renderListingGrid.js
 import { renderListingCard } from "./renderListingCard.js";
 
 export function renderListingGrid(container, listings) {

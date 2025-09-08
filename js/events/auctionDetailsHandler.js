@@ -1,4 +1,3 @@
-// js/events/auctionDetailsHandler.js
 import { getListingById } from "../api/listings/getListingById.js";
 import { getCredits } from "../api/listings/getCredits.js";
 import { renderBidBox } from "../ui/renderBidBox.js";

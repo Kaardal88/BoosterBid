@@ -9,10 +9,6 @@ function joinUrl(base, path, qs = "") {
   return `${b}/${p}${qs ? `?${qs}` : ""}`;
 }
 
-/**
- * Søk i ALLE listings (tittel + beskrivelse). Returnerer array av listings.
- * opts: { bids?: boolean, seller?: boolean, limit?: number, page?: number }
- */
 export async function searchListings(query, opts = {}) {
   if (!query || !query.trim()) return [];
   const params = new URLSearchParams({ q: query.trim() });

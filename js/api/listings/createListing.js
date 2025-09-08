@@ -8,10 +8,6 @@ function joinUrl(base, path) {
   return `${b}/${p}`;
 }
 
-/**
- * Opprett en ny listing
- * body: { title, description?, tags?: string[], media?: [{url,alt?}], endsAt: ISO }
- */
 export async function createListing(body) {
   const token = getToken();
   if (!token) throw new Error("Du må være innlogget.");

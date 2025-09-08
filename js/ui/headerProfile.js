@@ -1,4 +1,3 @@
-// js/ui/headerProfile.js
 import { getName, getToken } from "../events/auth/storage.js";
 import { getProfile } from "../api/profiles/getProfile.js";
 
@@ -14,7 +13,6 @@ export async function initHeaderProfile() {
   }
 
   try {
-    // henter min egen profil
     const profile = await getProfile(username);
 
     if (avatarImg) {

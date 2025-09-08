@@ -1,4 +1,3 @@
-// js/api/profiles/updateProfileMedia.js
 import { BASE_URL, ENDPOINTS } from "../endpoints.js";
 import { API_KEY } from "../config.js";
 import { getToken, getName } from "../../events/auth/storage.js";
@@ -32,21 +31,20 @@ function safeParse(t) {
 }
 
 /**
- * Oppdater avatar og/eller banner.
- * @param {string} username - må være samme som innlogget bruker
+ * Uppdate avatar and banner.
+ * @param {string} username - Must match logged in user
  * @param {{ avatar?: { url?: string, alt?: string }, banner?: { url?: string, alt?: string } }} payload
  */
 export async function updateAvatar(username, payload) {
   const loggedIn = getName?.();
-  if (!username) throw new Error("Mangler username");
-  if (!getToken()) throw new Error("Du er ikke innlogget.");
+  if (!username) throw new Error("Missing username.");
+  if (!getToken()) throw new Error("You are not logged in.");
   if (!loggedIn || loggedIn !== username) {
     throw new Error(
-      `Du kan bare oppdatere din egen profil. Innlogget: ${loggedIn || "ukjent"}, forsøkt: ${username}`,
+      `You are logged in as: ${loggedIn || "unknown account"}, but trying to update avatar for: ${username}`,
     );
   }
 
-  // 1) Primært endpoint: /auction/profiles/{name}/media (PUT)
   let path = ENDPOINTS?.updateProfileMedia?.replace(
     "{name}",
     encodeURIComponent(username),
@@ -58,16 +56,12 @@ export async function updateAvatar(username, payload) {
   let r = await doFetch(primaryUrl, "PUT", payload);
   if (r.ok) return r.json?.data ?? r.json;
 
-  // 2) Fallback: /auction/profiles/{name}/media (PATCH)
-  // (I tilfelle serveren forventer PATCH, noen miljøer gjør det)
   if (r.status === 404 || r.status === 405) {
     console.debug("[updateProfileMedia] fallback PATCH /media");
     r = await doFetch(primaryUrl, "PATCH", payload);
     if (r.ok) return r.json?.data ?? r.json;
   }
 
-  // 3) Fallback: oppdater direkte på /auction/profiles/{name} (PUT)
-  // (Enkelte deploys godtar media-oppdatering på hovedprofil-endpointet)
   const altPath = ENDPOINTS?.singleProfile?.replace(
     "{name}",
     encodeURIComponent(username),
@@ -79,7 +73,6 @@ export async function updateAvatar(username, payload) {
     if (r.ok) return r.json?.data ?? r.json;
   }
 
-  // Feil – samle beste feilmelding
   const msg = r.json?.errors?.[0]?.message || r.text || `Status ${r.status}`;
-  throw new Error(`Kunne ikke oppdatere profilmedia: ${msg}`);
+  throw new Error(`Could not update avatar: ${msg}`);
 }

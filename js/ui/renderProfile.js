@@ -1,4 +1,3 @@
-// js/ui/renderProfile.js
 import { getProfile } from "../api/profiles/getProfile.js";
 import { getName } from "../events/auth/storage.js";
 import {
@@ -44,7 +43,7 @@ export async function renderProfile(
     return;
   }
 
-  container.innerHTML = `<div class="profile profile--loading text-3xl" >Loading profile...</div>`;
+  container.innerHTML = `<div class="profile profile--loading text-x" >Loading profile...</div>`;
 
   try {
     const data = await getProfile(viewedName, opts);

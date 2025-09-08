@@ -1,12 +1,11 @@
-// js/api/profiles/updateProfile.js
-import { BASE_URL } from "../endpoints.js"; // eller ../config.js hvis du samler BASE_URL der
-import { API_KEY } from "../config.js"; // Noroff auction API krever x-noroff-api-key
-import { getToken } from "../../events/auth/storage.js"; // din eksisterende token-helper
+import { BASE_URL } from "../endpoints.js";
+import { API_KEY } from "../config.js";
+import { getToken } from "../../events/auth/storage.js";
 
 /**
- * Oppdaterer innlogget brukers profil (bio, avatar, banner osv.)
- * @param {string} name - Profilnavnet som skal oppdateres
- * @param {Object} patch - Delvis oppdatering, f.eks. { bio: "tekst" }
+ * Updating a profile
+ * @param {string} name - Profile name to update
+ * @param {Object} patch - Parts to update. { bio: "text" }
  */
 export async function updateProfile(name, patch) {
   const token = getToken();
@@ -24,7 +23,7 @@ export async function updateProfile(name, patch) {
 
   if (!res.ok) {
     const errText = await res.text().catch(() => "");
-    throw new Error(`Kunne ikke oppdatere profil (${res.status}): ${errText}`);
+    throw new Error(`Could not update profile (${res.status}): ${errText}`);
   }
 
   return await res.json();

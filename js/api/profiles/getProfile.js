@@ -1,37 +1,33 @@
-// js/api/profiles/getProfile.js
 import { BASE_URL, ENDPOINTS } from "../endpoints.js";
 import { API_KEY } from "../config.js";
 import { getToken } from "../../events/auth/storage.js";
 
 function joinUrl(base, path, qs = "") {
-  const b = (base || "").replace(/\/+$/, ""); // fjern trailing /
-  const p = (path || "").replace(/^\/+/, ""); // fjern leading /
+  const b = (base || "").replace(/\/+$/, "");
+  const p = (path || "").replace(/^\/+/, "");
   const q = qs ? (qs.startsWith("?") ? qs : `?${qs}`) : "";
   return `${b}/${p}${q}`;
 }
 
 /**
- * Hent profil for gitt brukernavn.
+ * GetProfile.
  * @param {string} username
  * @param {{ listings?: boolean, wins?: boolean }} [opts]
  */
 export async function getProfile(username, opts = {}) {
   if (!username || typeof username !== "string") {
-    throw new Error("getProfile: 'username' mangler/ugyldig.");
+    throw new Error("getProfile: 'username' missing or invalid.");
   }
 
   const token = getToken();
 
-  if (!token) throw new Error("Du er ikke innlogget. Mangler token.");
+  if (!token) throw new Error("You are not logged in.");
 
-  // f.eks. "auction/profiles/{name}" (uten leading slash i ENDPOINTS)
   let path = ENDPOINTS?.singleProfile;
   if (!path) throw new Error("ENDPOINTS.singleProfile mangler.");
   path = path.replace("{name}", encodeURIComponent(username));
   if (path.includes("{name}")) {
-    throw new Error(
-      "ENDPOINTS.singleProfile inneholder fortsatt {name} – sjekk endpoints.js",
-    );
+    throw new Error("ENDPOINTS.singleProfile contains {name} – ");
   }
 
   const params = new URLSearchParams();
@@ -49,13 +45,11 @@ export async function getProfile(username, opts = {}) {
     },
   });
 
-  // Les body KUN én gang
   const text = await res.text();
   console.debug("[getProfile] status:", res.status, res.statusText);
   if (!res.ok) {
-    // vis litt av body i feilmelding (404 = user finnes ikke)
     throw new Error(
-      `Kunne ikke hente profil (${res.status}). Respons: ${text.slice(0, 300)}`,
+      `Could not get profile (${res.status}). Response: ${text.slice(0, 300)}`,
     );
   }
 
@@ -63,12 +57,12 @@ export async function getProfile(username, opts = {}) {
   try {
     json = text ? JSON.parse(text) : null;
   } catch {
-    throw new Error("Server svarte ikke med gyldig JSON.");
+    throw new Error("Server answered with invalid JSON.");
   }
 
   const data = json?.data ?? json ?? null;
   if (!data || typeof data !== "object") {
-    throw new Error("API svarte uten data for denne profilen.");
+    throw new Error("API did not return an object.");
   }
   return data;
 }

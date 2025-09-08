@@ -22,30 +22,29 @@ export function renderBid(listingId, credits) {
       listingId,
       "Budbeløp:",
       amount,
-    ); // Legg til
+    );
     if (!amount || amount <= 0) {
       bidMessage.textContent = "Vennligst skriv inn et gyldig beløp.";
-      console.log("Ugyldig budbeløp"); // Legg til
+      console.log("Ugyldig budbeløp");
       return;
     }
 
     const result = await bidHandler(listingId, amount);
-    console.log("Resultat fra bidHandler:", result); // Legg til
+    console.log("Resultat fra bidHandler:", result);
     bidMessage.textContent = result.message;
     bidMessage.className = result.success
       ? "mt-2 text-green-500"
       : "mt-2 text-red-500";
 
     if (result.success) {
-      bidAmountInput.value = ""; // Tøm inputfeltet
-      renderCredits(credits - amount); // Oppdater credits
+      bidAmountInput.value = "";
+      renderCredits(credits - amount);
     }
   });
 
   return bidSection;
 }
 
-// Antatt eksisterende funksjon for å rendere credits
 export function renderCredits(credits) {
   const creditsElement = document.getElementById("total-credits");
   creditsElement.textContent = credits || "...Loading";

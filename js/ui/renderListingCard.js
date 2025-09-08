@@ -1,4 +1,3 @@
-// js/ui/listings/renderListingCard.js
 export function renderListingCard(l) {
   const img = l?.media?.[0]?.url || "https://placehold.co/400x250";
   const alt = l?.media?.[0]?.alt || l?.title || "Listing image";
