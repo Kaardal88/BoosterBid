@@ -52,6 +52,7 @@ export function router() {
     case "/register":
     case "/register/index.html": {
       registerHandler();
+
       break;
     }
     case "/details":

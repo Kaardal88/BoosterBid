@@ -12,7 +12,7 @@ export async function renderListings(container, posts) {
   container.innerHTML =
     "<p class='text-white font-bold text-3xl'>Loading listings...</p>";
 
-  container.innerHTML = ""; // Fjern loader
+  container.innerHTML = "";
   for (const listing of posts) {
     const { title, id, description, media, created, endsAt, bids } = listing;
 

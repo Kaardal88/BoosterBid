@@ -36,7 +36,12 @@
       <h1 class="text-3xl font-bold mb-20 text-center">
         Register for an account
       </h1>
-      <form id="form" class="max-w-md mx-auto bg-primary/20 p-6 rounded-md">
+      <form
+        id="form"
+        type="post"
+        novalidate
+        class="max-w-md mx-auto bg-primary/20 p-6 rounded-md"
+      >
         <div id="message"></div>
         <fieldset>
           <div>
@@ -53,6 +58,7 @@
                 class="block w-full rounded-md border-0 py-1.5 pl-2 text-black ring-1 ring-inset ring-gray-300 placeholder:text-gray-900 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
               />
             </div>
+            <p class="text-red-500 text-sm mt-1" data-error-for="name"></p>
           </div>
           <div>
             <label for="email" class="block text-sm/6 font-medium text-gray-200"
@@ -63,13 +69,12 @@
                 id="email"
                 name="email"
                 type="email"
-                pattern="^[^@]+@(stud\.|)(noroff\.no)$"
-                title="Please provide a noroff.no or a stud.noroff.no email address."
                 autocomplete="email"
                 required
                 class="block w-full rounded-md border-0 py-1.5 pl-2 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
               />
             </div>
+            <p class="text-red-500 text-sm mt-1" data-error-for="email"></p>
           </div>
           <div>
             <div class="flex items-center justify-between">
@@ -90,11 +95,12 @@
                 class="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
               />
             </div>
+            <p class="text-red-500 text-sm mt-1" data-error-for="password"></p>
           </div>
           <div>
             <div class="flex items-center justify-between">
               <label for="bio" class="block text-sm/6 font-medium text-gray-200"
-                >Bio</label
+                >Bio (optional)</label
               >
             </div>
             <div class="mt-2">
@@ -113,7 +119,7 @@
               <label
                 for="avatarUrl"
                 class="block text-sm/6 font-medium text-gray-200"
-                >avatar Url</label
+                >avatar Url (optional)</label
               >
             </div>
             <div class="mt-2">
@@ -125,6 +131,7 @@
               />
             </div>
           </div>
+          <p class="text-red-500 text-sm mt-1" data-error-for="avatarUrl"></p>
         </fieldset>
         <div>
           <button

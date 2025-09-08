@@ -1,8 +1,17 @@
 import { getListingsPage } from "../api/listings/getListingsPage.js";
 import { renderListingCard } from "../ui/renderListingCard.js";
+import { showSpinner } from "../ui/loader.js";
 
-export function homeIndexHandler() {
+export async function homeIndexHandler() {
   const grid = document.getElementById("auction-container");
+  showSpinner(grid, "loading listings");
+  try {
+    const { items } = await getListingsPage({ page: 1, limit: 9 });
+    grid.innerHTML = items.map(renderListingCard).join("");
+  } catch (error) {
+    grid.innerHTML = `<p class="text-red-400">Could not load listings.</p>`;
+    console.error(error);
+  }
   const loadMoreBtn = document.getElementById("load-more");
   const statusSelect = document.getElementById("filter-status");
   const tagInput = document.getElementById("filter-tag"); // valgfritt
@@ -20,7 +29,12 @@ export function homeIndexHandler() {
     if (on) {
       grid.insertAdjacentHTML(
         "beforeend",
-        `<div id="loading-sentinel" class="col-span-full text-center text-sm text-gray-400">Loading…</div>`,
+        `<div class="bb-loader flex items-center justify-center gap-3 py-10">
+          <span
+            class="inline-block w-24 h-24 rounded-full border-red-500 border-red/30 border-t-red animate-spin"
+          ></span>
+          <span class="text-sm opacity-80">Test…</span>
+        </div>`,
       );
       loadMoreBtn?.classList.add("hidden");
     } else {
