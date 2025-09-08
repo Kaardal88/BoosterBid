@@ -1,10 +1,10 @@
 import { getListingsPage } from "../api/listings/getListingsPage.js";
 import { renderListingCard } from "../ui/renderListingCard.js";
-import { showSpinner } from "../ui/loader.js";
 
 export async function homeIndexHandler() {
   const grid = document.getElementById("auction-container");
-  showSpinner(grid, "loading listings");
+  const container = document.getElementById("auction-container");
+  container.innerHTML = `<p class="text-white text-3xl  mx-auto">Loading Listings...</p>`;
   try {
     const { items } = await getListingsPage({ page: 1, limit: 9 });
     grid.innerHTML = items.map(renderListingCard).join("");

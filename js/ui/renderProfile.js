@@ -44,7 +44,7 @@ export async function renderProfile(
     return;
   }
 
-  container.innerHTML = `<div class="profile profile--loading">Loading profile...</div>`;
+  container.innerHTML = `<div class="profile profile--loading text-3xl" >Loading profile...</div>`;
 
   try {
     const data = await getProfile(viewedName, opts);
