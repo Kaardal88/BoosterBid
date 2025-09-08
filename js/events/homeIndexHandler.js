@@ -14,16 +14,15 @@ export async function homeIndexHandler() {
   }
   const loadMoreBtn = document.getElementById("load-more");
   const statusSelect = document.getElementById("filter-status");
-  const tagInput = document.getElementById("filter-tag"); // valgfritt
+  const tagInput = document.getElementById("filter-tag");
   if (!grid) return;
 
   let page = 1;
   const limit = 9;
   let reachedEnd = false;
 
-  // nåværende filter-state
-  let activeFilter = undefined; // undefined = alle, true = aktive
-  let tagFilter = ""; // valgfritt
+  let activeFilter = undefined;
+  let tagFilter = "";
 
   function uiSetLoading(on) {
     if (on) {

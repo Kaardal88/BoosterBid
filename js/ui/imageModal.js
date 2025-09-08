@@ -1,4 +1,3 @@
-// js/ui/modal/imageModal.js
 let modalEl, imgEl, captionEl;
 
 function ensureModalInDOM() {
