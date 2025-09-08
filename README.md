@@ -25,24 +25,25 @@ Live deploy: https://boosterbid.netlify.app/
 
 ## Built with
 
-- HTML
-- Tailwind css
-- javaScript
+- HTML5
+- Tailwind CSS
+- JavaScript (ES Modules)
 - Noroff API
 - Netlify (Hosting)
 
-### Also
+### Project management & design
 
 - Figma prototype
 - Figma style guide
 - Trello for project tracking
+
 
 ## Get Started
 
 1. Clone the repo:
 
 ```bash
-git clone git@github.com:NoroffFEU/project-exam-1.git
+git clone https://github.com/Kaardal88/BoosterBid.git
 ```
 
 2. Install the dependencies:
@@ -61,5 +62,19 @@ npm install
 To run the app, run the following commands:
 
 ```bash
-npm run start
+npm run dev
 ```
+
+Then open the app in the browser with a local server, e.g. Live Server
+ or:
+
+ ```bash
+npx serve .
+```
+
+## Author
+
+Kim-André Kårdal
+
+GitHub: https://github.com/Kaardal88 <br>
+LinkedIn: www.linkedin.com/in/kim-andré-kårdal-631a99276
