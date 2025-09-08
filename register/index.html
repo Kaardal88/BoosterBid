@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Create a free BoosterBid account and start bidding on unique items today."
+    />
+    <title>BoosterBid | Register</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="/js/utilities/menu.js" defer></script>
+    <script src="/js/app.js" type="module"></script>
+  </head>
+  <body
+    class="relative bg-[url('/images/BB_bg_img.jpg')] bg-cover bg-center font-main w-full min-h-screen flex flex-col text-white"
+  >
+    <header class="bg-black shadow-md sticky top-0 z-50">
+      <div
+        class="container mx-auto px-4 py-4 flex items-center justify-between"
+      >
+        <div class="text-2xl sm:text-lg font-bold text-gray-800">
+          <a href="/index.html"
+            ><img src="/images/BB_logo.png" alt="Logo" class="w-52 h-auto"
+          /></a>
+        </div>
+      </div>
+    </header>
+    <main class="container mx-auto px-4 py-8 flex-grow mt-20">
+      <h1 class="text-3xl font-bold mb-20 text-center">
+        Register for an account
+      </h1>
+      <form
+        id="form"
+        type="post"
+        novalidate
+        class="max-w-md mx-auto bg-primary/20 p-6 rounded-md"
+      >
+        <div id="message"></div>
+        <fieldset>
+          <div>
+            <label for="name" class="block text-sm/6 font-medium text-gray-200"
+              >Name</label
+            >
+            <div class="mt-2">
+              <input
+                id="name"
+                name="name"
+                type="name"
+                pattern="[A-Za-z0-9_]+"
+                required
+                class="block w-full rounded-md border-0 py-1.5 pl-2 text-black ring-1 ring-inset ring-gray-300 placeholder:text-gray-900 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+              />
+            </div>
+            <p class="text-red-500 text-sm mt-1" data-error-for="name"></p>
+          </div>
+          <div>
+            <label for="email" class="block text-sm/6 font-medium text-gray-200"
+              >Email address</label
+            >
+            <div class="mt-2">
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                required
+                class="block w-full rounded-md border-0 py-1.5 pl-2 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+              />
+            </div>
+            <p class="text-red-500 text-sm mt-1" data-error-for="email"></p>
+          </div>
+          <div>
+            <div class="flex items-center justify-between">
+              <label
+                for="password"
+                class="block text-sm/6 font-medium text-white"
+                >Password</label
+              >
+            </div>
+            <div class="mt-2">
+              <input
+                id="password"
+                name="password"
+                type="password"
+                autocomplete="current-password"
+                minlength="8"
+                required
+                class="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+              />
+            </div>
+            <p class="text-red-500 text-sm mt-1" data-error-for="password"></p>
+          </div>
+          <div>
+            <div class="flex items-center justify-between">
+              <label for="bio" class="block text-sm/6 font-medium text-gray-200"
+                >Bio (optional)</label
+              >
+            </div>
+            <div class="mt-2">
+              <textarea
+                id="bio"
+                name="bio"
+                rows="4"
+                cols="50"
+                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+              >
+              </textarea>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-center justify-between">
+              <label
+                for="avatarUrl"
+                class="block text-sm/6 font-medium text-gray-200"
+                >avatar Url (optional)</label
+              >
+            </div>
+            <div class="mt-2">
+              <input
+                type="url"
+                id="avatarUrl"
+                name="avatarUrl"
+                class="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+              />
+            </div>
+          </div>
+          <p class="text-red-500 text-sm mt-1" data-error-for="avatarUrl"></p>
+        </fieldset>
+        <div>
+          <button
+            id="reg-btn"
+            class="bg-primary hover:bg-primaryBtnHover mt-10 flex w-full justify-center rounded-md bg-customTeal px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-hoverTeal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </main>
+  </body>
+</html>

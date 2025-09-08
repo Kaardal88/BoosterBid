@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1 {
+    font-size: clamp(1.75rem, 4vw + 1rem, 4rem);
+    @apply font-bold leading-tight tracking-tight;
+  }
+  h2 {
+    font-size: clamp(1.5rem, 3vw + 0.75rem, 3rem);
+    @apply font-semibold leading-snug;
+  }
+  h3 {
+    font-size: clamp(1.25rem, 2.5vw + 0.5rem, 2rem);
+    @apply font-semibold leading-snug;
+  }
+
+  h4 {
+    @apply text-xl font-medium leading-snug;
+  }
+  h5 {
+    @apply text-lg font-medium;
+  }
+  h6 {
+    @apply text-base font-medium;
+  }
+}
