@@ -5,12 +5,15 @@ export async function homeIndexHandler() {
   const grid = document.getElementById("auction-container");
   const container = document.getElementById("auction-container");
   container.innerHTML = `<p class="text-white text-3xl  mx-auto">Loading Listings...</p>`;
+
   try {
     const { items } = await getListingsPage({ page: 1, limit: 9 });
     grid.innerHTML = items.map(renderListingCard).join("");
   } catch (error) {
     grid.innerHTML = `<p class="text-red-400">Could not load listings.</p>`;
     console.error(error);
+  } finally {
+    container.removeAttribute("aria-busy");
   }
   const loadMoreBtn = document.getElementById("load-more");
   const statusSelect = document.getElementById("filter-status");

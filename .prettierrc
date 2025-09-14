@@ -1,4 +1,8 @@
 {
   "semi": true,
-  "singleQuote": false
+  "singleQuote": false,
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "htmlWhitespaceSensitivity": "ignore"
+  }
 }
