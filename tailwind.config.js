@@ -10,6 +10,7 @@ export default {
         primary: "#2B675D",
         secondary: "#FF7F50",
         accent: "#66fcf1",
+        brand: "#3CB7A9",
         primaryBtnHover: "#1B4E45",
         footer: "#486168",
       },

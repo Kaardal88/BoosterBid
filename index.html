@@ -137,27 +137,31 @@
         </div>
       </nav>
     </header>
-    <section class="mt-24">
+    <section class="container mx-auto px-4 mt-24">
       <div
-        class="relative h-[320px] sm:h-[420px] md:h-[520px] lg:h-[980px] overflow-hidden rounded-xl"
+        class="relative h-[360px] sm:h-[440px] md:h-[520px] lg:h-[640px] overflow-hidden rounded-2xl"
       >
         <img
           src="/images/wooden-judges-gavel-table-courtroom-enforcement-office.jpg"
-          alt="BoosterBid"
-          class="absolute inset-0 w-full h-full object-cover"
+          alt=""
+          class="absolute inset-0 w-full h-full object-cover object-center"
         />
         <div
-          class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent"
+          class="absolute inset-0 bg-black/40 bg-gradient-to-t from-black/90 via-black/50 to-transparent lg:bg-transparent"
         ></div>
         <div
-          class="relative lg:mt-64 lg:ml-10 z-10 justify-center flex flex-col items-center text-white py-24 px-10"
+          class="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 px-6 text-center lg:items-start lg:justify-end lg:p-16 lg:text-left"
         >
           <h1
-            class="mt-2 text-center font-bold leading-tight tracking-tight max-w-[24ch] text-[clamp(1.75rem,4vw+1rem,4rem)]"
+            class="font-bold leading-tight tracking-tight text-brand drop-shadow-lg max-w-[20ch] text-2xl sm:text-3xl lg:text-5xl xl:text-6xl"
           >
-            Find your next auction. We offer a wide selection of auctions for
-            you to choose from.
+            Find your next auction
           </h1>
+          <p
+            class="text-white/85 max-w-[40ch] text-sm sm:text-base lg:text-xl"
+          >
+            We offer a wide selection of auctions for you to choose from.
+          </p>
         </div>
       </div>
     </section>
@@ -166,58 +170,76 @@
         Auctions
       </h1>
 
-      <div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center">
-        <label for="filter-status" class="text-white">Filter</label>
-        <select id="filter-status" class="border rounded p-2 text-black">
-          <option value="all">Active Listings</option>
-          <option value="active">All Listings</option>
-        </select>
-        <input
-          id="filter-tag"
-          type="text"
-          placeholder="tag (optional)"
-          class="border rounded p-2 text-black"
-        />
-        <p class="text-white">Or search</p>
-        <div class="flex flex-col gap-2 md:flex-row md:items-center">
-          <input
-            id="search-input"
-            type="text"
-            placeholder="Search auctions..."
-            class="border rounded-l-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full md:w-48 lg:w-64"
-          />
-          <div class="flex gap-2">
+      <div class="flex flex-col gap-8 lg:flex-row">
+        <aside
+          class="flex flex-col gap-6 lg:w-64 lg:shrink-0 lg:self-start lg:sticky lg:top-28"
+        >
+          <div class="flex flex-col gap-2">
+            <label for="search-input" class="text-white font-semibold"
+              >Search</label
+            >
+            <input
+              id="search-input"
+              type="text"
+              placeholder="Search auctions..."
+              class="border rounded-md py-2 px-3 text-black focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
+            />
+            <div class="flex gap-2">
+              <button
+                id="search-btn"
+                type="button"
+                class="flex-1 bg-primary hover:bg-primaryBtnHover text-white rounded-md py-2 px-4"
+              >
+                Search
+              </button>
+              <a
+                href="/index.html"
+                class="flex-1 text-center bg-primary hover:bg-primaryBtnHover text-white rounded-md py-2 px-4"
+              >
+                Clear
+              </a>
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <label for="filter-status" class="text-white font-semibold"
+              >Filter</label
+            >
+            <select
+              id="filter-status"
+              class="border rounded-md p-2 text-black w-full"
+            >
+              <option value="all">All Listings</option>
+              <option value="active">Active Listings</option>
+            </select>
+            <input
+              id="filter-tag"
+              type="text"
+              placeholder="Tag (press Enter)"
+              aria-label="Filter by tag"
+              class="border rounded-md p-2 text-black w-full"
+            />
+          </div>
+        </aside>
+
+        <div class="flex-1 min-w-0">
+          <div
+            id="auction-container"
+            class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 max-w-full overflow-x-hidden"
+          ></div>
+
+          <div class="mt-20 flex justify-center">
             <button
-              id="search-btn"
-              type="button"
-              class="bg-primary hover:bg-primaryBtnHover text-white rounded-md py-2 px-4"
+              id="load-more"
+              class="bg-primary hover:bg-primaryBtnHover text-white px-5 py-2 rounded hidden"
             >
-              Search
+              See more
             </button>
-            <a
-              href="/index.html"
-              class="bg-primary hover:bg-primaryBtnHover text-white rounded-md py-2 px-4"
-            >
-              Clear
-            </a>
           </div>
         </div>
       </div>
 
-      <div
-        id="auction-container"
-        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-full overflow-x-hidden"
-      ></div>
-
       <div id="profile-container" class="max-w-4xl mx-auto -mt-16 px-4"></div>
-      <div class="mt-20 flex justify-center">
-        <button
-          id="load-more"
-          class="bg-primary hover:bg-primaryBtnHover text-white px-5 py-2 rounded hidden"
-        >
-          See more
-        </button>
-      </div>
       <a
         id="scrollTopBtn"
         href="#"

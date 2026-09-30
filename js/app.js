@@ -18,6 +18,7 @@ import { getName } from "./events/auth/storage.js";
 document.addEventListener("DOMContentLoaded", () => {
   router();
   initHeaderProfile();
+  setFavicon();
 });
 function setFavicon(path = "/images/BB_logo.png") {
   const link =
@@ -94,7 +95,3 @@ export function router() {
     }
   }
 }
-document.addEventListener("DOMContentLoaded", () => {
-  router();
-  setFavicon();
-});

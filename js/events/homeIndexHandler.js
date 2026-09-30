@@ -3,26 +3,16 @@ import { renderListingCard } from "../ui/renderListingCard.js";
 
 export async function homeIndexHandler() {
   const grid = document.getElementById("auction-container");
-  const container = document.getElementById("auction-container");
-  container.innerHTML = `<p class="text-white text-3xl  mx-auto">Loading Listings...</p>`;
-
-  try {
-    const { items } = await getListingsPage({ page: 1, limit: 9 });
-    grid.innerHTML = items.map(renderListingCard).join("");
-  } catch (error) {
-    grid.innerHTML = `<p class="text-red-400">Could not load listings.</p>`;
-    console.error(error);
-  } finally {
-    container.removeAttribute("aria-busy");
-  }
   const loadMoreBtn = document.getElementById("load-more");
   const statusSelect = document.getElementById("filter-status");
   const tagInput = document.getElementById("filter-tag");
   if (!grid) return;
 
   let page = 1;
-  const limit = 9;
+  const limit = 12;
   let reachedEnd = false;
+  let isLoading = false;
+  let expanded = false;
 
   let activeFilter = undefined;
   let tagFilter = "";
@@ -31,11 +21,11 @@ export async function homeIndexHandler() {
     if (on) {
       grid.insertAdjacentHTML(
         "beforeend",
-        `<div class="bb-loader flex items-center justify-center gap-3 py-10">
+        `<div id="loading-sentinel" class="col-span-full flex items-center justify-center gap-3 py-10">
           <span
-            class="inline-block w-24 h-24 rounded-full border-red-500 border-red/30 border-t-red animate-spin"
+            class="inline-block w-12 h-12 rounded-full border-4 border-white/30 border-t-white animate-spin"
           ></span>
-          <span class="text-sm opacity-80">Test…</span>
+          <span class="text-sm text-white opacity-80">Loading…</span>
         </div>`,
       );
       loadMoreBtn?.classList.add("hidden");
@@ -44,8 +34,15 @@ export async function homeIndexHandler() {
     }
   }
 
+  function updateButton() {
+    if (!loadMoreBtn) return;
+    loadMoreBtn.textContent = expanded ? "See less" : "See more";
+    loadMoreBtn.classList.toggle("hidden", !expanded && reachedEnd);
+  }
+
   async function loadPage() {
-    if (reachedEnd) return;
+    if (reachedEnd || isLoading) return;
+    isLoading = true;
     uiSetLoading(true);
     try {
       const { items } = await getListingsPage({
@@ -63,7 +60,7 @@ export async function homeIndexHandler() {
         if (page === 1) {
           grid.innerHTML = `<p class="text-gray-300">No listings available.</p>`;
         }
-        loadMoreBtn?.classList.add("hidden");
+        updateButton();
         return;
       }
 
@@ -72,35 +69,48 @@ export async function homeIndexHandler() {
         items.map(renderListingCard).join(""),
       );
 
-      if (items.length < limit) {
-        reachedEnd = true;
-        loadMoreBtn?.classList.add("hidden");
-      } else {
-        loadMoreBtn?.classList.remove("hidden");
-      }
-
+      if (items.length < limit) reachedEnd = true;
+      if (page > 1) expanded = true;
       page += 1;
+      updateButton();
     } catch (err) {
       uiSetLoading(false);
       grid.insertAdjacentHTML(
         "beforeend",
         `<p class="col-span-full text-red-300">Loading failed: ${err.message}</p>`,
       );
+    } finally {
+      isLoading = false;
     }
+  }
+
+  // Keeps the first page already in the DOM instead of fetching it again
+  function seeLess() {
+    while (grid.children.length > limit) {
+      grid.lastElementChild.remove();
+    }
+    page = 2;
+    reachedEnd = false;
+    expanded = false;
+    updateButton();
+    grid.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   function resetAndLoad() {
     page = 1;
     reachedEnd = false;
+    expanded = false;
     grid.innerHTML = "";
     loadMoreBtn?.classList.add("hidden");
     loadPage();
   }
 
-  grid.innerHTML = "";
   resetAndLoad();
 
-  loadMoreBtn?.addEventListener("click", loadPage);
+  loadMoreBtn?.addEventListener("click", () => {
+    if (expanded) seeLess();
+    else loadPage();
+  });
 
   statusSelect?.addEventListener("change", () => {
     const v = statusSelect.value;
