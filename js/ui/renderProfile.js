@@ -4,18 +4,12 @@ import {
   renderProfileMyListings,
   initProfileMyListings,
 } from "./profile/renderProfileMyListings.js";
-import { renderProfileBio, initProfileBio } from "./renderProfileBio.js";
-import { updateProfile } from "../api/profiles/updateProfile.js";
+import {
+  renderProfileActions,
+  initProfileActions,
+} from "./profile/renderProfileActions.js";
 import { initImageModal } from "./imageModal.js";
 
-function isValidHttpUrl(str) {
-  try {
-    const u = new URL(str);
-    return u.protocol === "http:" || u.protocol === "https:";
-  } catch {
-    return false;
-  }
-}
 function formatDate(iso) {
   if (!iso) return "-";
   const d = new Date(iso);
@@ -75,60 +69,7 @@ export async function renderProfile(
     `;
     initImageModal(container, ".js-image-modal");
 
-    const bioSectionHTML = iAmOwner ? renderProfileBio(data) : "";
-
-    const ownerEditorHTML = !iAmOwner
-      ? ""
-      : `
-      <section class="profile__section">
-        <div class="grid gap-4 md:grid-cols-2">
-          <form id="avatar-form" class="p-4 rounded shadow bg-primary/20">
-            <h3 class="font-semibold mb-2">Update profile image (avatar)</h3>
-            <input id="avatar-url" type="url" placeholder="Avatar URL" class="w-full border rounded p-2 mb-2" />
-            <input id="avatar-alt" type="text" placeholder="Alt-text (optional)" class="w-full border rounded p-2 mb-2" />
-            <button id="submit-avatar" class="bg-primary hover:bg-primaryBtnHover text-white font-semibold px-4 py-2 rounded">Save</button>
-            <p id="avatar-msg" class="text-sm mt-2"></p>
-          </form>
-
-          <form id="banner-form" class="p-4 rounded shadow bg-primary/20">
-            <h3 class="font-semibold mb-2">Update header image (banner)</h3>
-            <input id="banner-url" type="url" placeholder="Banner URL" class="w-full border text-black rounded p-2 mb-2" />
-            <input id="banner-alt" type="text" placeholder="Alt-text (optional)" class="w-full border rounded p-2 mb-2" />
-            <button id="submit-banner" class="bg-primary hover:bg-primaryBtnHover text-white font-semibold px-4 py-2 rounded">Save</button>
-            <p id="banner-msg" class="text-sm mt-2"></p>
-          </form>
-        </div>
-      </section>
-    `;
-
-    // LISTINGS
-    const listingsHTML = Array.isArray(data?.listings)
-      ? `
-      <section class="profile__section bg-primary/20 p-4 rounded">
-        <h2 class="text-lg font-semibold mb-2">Listings</h2>
-        <ul class="card-grid">
-          ${data.listings
-            .map((l) => {
-              const img = l?.media?.[0]?.url || "https://placehold.co/400x250";
-              const alt = l?.media?.[0]?.alt || l?.title || "Listing image";
-              return `
-            <li class="card">
-              <img class="card__img" src="${img}" alt="${alt}">
-              <div class="card__body">
-                <h3 class="card__title">${l?.title ?? "Untitled"}</h3>
-                <p class="card__text">${l?.description ?? ""}</p>
-                <p class="card__meta">
-                  <span>Created: ${formatDate(l?.created)}</span>
-                  <span>Ends: ${formatDate(l?.endsAt)}</span>
-                </p>
-              </div>
-            </li>`;
-            })
-            .join("")}
-        </ul>
-      </section>
-    `
-      : "";
+    const actionsHTML = iAmOwner ? renderProfileActions() : "";
 
     // WINS
     const winsHTML = Array.isArray(data?.wins)
@@ -167,99 +108,71 @@ export async function renderProfile(
     `
       : "";
 
-    const myListingsHTML = iAmOwner ? renderProfileMyListings(data) : "";
+    const myListingsHTML = renderProfileMyListings(data);
 
     container.innerHTML = `
       <article class="profile space-y-8">
         ${headerHTML}
-        ${bioSectionHTML}
-        ${ownerEditorHTML}
+        ${actionsHTML}
         ${myListingsHTML}
-        ${listingsHTML}
         ${winsHTML}
       </article>
     `;
 
     if (iAmOwner) {
-      initProfileBio(container, data.name, () => {});
+      const reload = () =>
+        renderProfile(container, data.name, { listings: true, wins: true });
 
-      // Avatar
-      const avatarForm = container.querySelector("#avatar-form");
-      avatarForm?.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const url = container.querySelector("#avatar-url")?.value?.trim();
-        const alt = container.querySelector("#avatar-alt")?.value?.trim();
-        const msg = container.querySelector("#avatar-msg");
-        msg.textContent = "";
-        if (!url || !isValidHttpUrl(url)) {
-          msg.textContent = "Invalid URL.";
-          msg.className = "text-red-600 text-sm";
-          return;
-        }
-        try {
-          msg.textContent = "Saving…";
-          msg.className = "text-gray-600 text-sm";
-          const updated = await updateProfile(data.name, {
-            avatar: { url, ...(alt ? { alt } : {}) },
+      initProfileActions(container, data, {
+        onProfileSaved: (updated) => {
+          Object.assign(data, {
+            bio: updated?.bio ?? data.bio,
+            avatar: updated?.avatar ?? data.avatar,
+            banner: updated?.banner ?? data.banner,
           });
-          const img = container.querySelector(".profile__avatar");
-          if (img) {
-            img.src = updated?.avatar?.url || url;
-            img.alt = updated?.avatar?.alt || alt || img.alt;
+
+          const avatarImg = container.querySelector(".profile__avatar");
+          if (avatarImg && data.avatar?.url) {
+            avatarImg.src = data.avatar.url;
+            avatarImg.alt = data.avatar.alt || avatarImg.alt;
           }
-          msg.textContent = "Avatar updated ✔";
-          msg.className = "text-green-700 text-sm";
-        } catch (err) {
-          msg.textContent = err.message || "Could not update avatar.";
-          msg.className = "text-red-600 text-sm";
-        }
-      });
+          const headerAvatar = document.getElementById("header-avatar");
+          if (headerAvatar && data.avatar?.url) {
+            headerAvatar.src = data.avatar.url;
+          }
 
-      // Banner
-      const bannerForm = container.querySelector("#banner-form");
-      bannerForm?.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const url = container.querySelector("#banner-url")?.value?.trim();
-        const alt = container.querySelector("#banner-alt")?.value?.trim();
-        const msg = container.querySelector("#banner-msg");
-        msg.textContent = "";
-        if (!url || !isValidHttpUrl(url)) {
-          msg.textContent = "Invalid URL.";
-          msg.className = "text-red-600 text-sm";
-          return;
-        }
-        try {
-          msg.textContent = "Saving…";
-          msg.className = "text-gray-600 text-sm";
-          const updated = await updateProfile(data.name, {
-            banner: { url, ...(alt ? { alt } : {}) },
-          });
-          let banner = container.querySelector(".profile__banner");
-          if (!banner) {
-            const header = container.querySelector(".profile__header");
-            header?.insertAdjacentHTML(
-              "afterbegin",
-              `<img class="profile__banner w-full h-48 object-cover" src="${updated?.banner?.url || url}" alt="">`,
-            );
+          const header = container.querySelector(".profile__header");
+          const banner = container.querySelector(".profile__banner");
+          if (data.banner?.url) {
+            if (banner) {
+              banner.src = data.banner.url;
+            } else {
+              header?.insertAdjacentHTML(
+                "afterbegin",
+                `<img class="profile__banner w-full h-48 object-cover" src="${data.banner.url}" alt="">`,
+              );
+            }
+          }
+
+          let bioP = container.querySelector(".profile__bio");
+          if (data.bio) {
+            if (!bioP) {
+              header?.insertAdjacentHTML(
+                "beforeend",
+                `<p class="profile__bio mt-4"></p>`,
+              );
+              bioP = container.querySelector(".profile__bio");
+            }
+            bioP.textContent = data.bio;
           } else {
-            banner.src = updated?.banner?.url || url;
+            bioP?.remove();
           }
-          msg.textContent = "Header updated ✔";
-          msg.className = "text-green-700 text-sm";
-        } catch (err) {
-          msg.textContent = err.message || "Could not update header";
-          msg.className = "text-red-600 text-sm";
-        }
+        },
+        onListingCreated: reload,
       });
 
       //My listings
-      initProfileMyListings(container, async () => {
-        const fresh = await getProfile(data.name, {
-          listings: true,
-          wins: true,
-        });
-        renderProfile(container, fresh.name, { listings: true, wins: true });
-      });
+      initProfileMyListings(container, reload);
     }
   } catch (err) {
     console.error(err);
