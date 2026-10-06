@@ -4,6 +4,7 @@ import { renderListingCard } from "../ui/renderListingCard.js";
 export async function homeIndexHandler() {
   const grid = document.getElementById("auction-container");
   const loadMoreBtn = document.getElementById("load-more");
+  const seeLessBtn = document.getElementById("see-less");
   const statusSelect = document.getElementById("filter-status");
   const tagInput = document.getElementById("filter-tag");
   if (!grid) return;
@@ -12,7 +13,6 @@ export async function homeIndexHandler() {
   const limit = 12;
   let reachedEnd = false;
   let isLoading = false;
-  let expanded = false;
 
   let activeFilter = undefined;
   let tagFilter = "";
@@ -29,15 +29,15 @@ export async function homeIndexHandler() {
         </div>`,
       );
       loadMoreBtn?.classList.add("hidden");
+      seeLessBtn?.classList.add("hidden");
     } else {
       document.getElementById("loading-sentinel")?.remove();
     }
   }
 
-  function updateButton() {
-    if (!loadMoreBtn) return;
-    loadMoreBtn.textContent = expanded ? "See less" : "See more";
-    loadMoreBtn.classList.toggle("hidden", !expanded && reachedEnd);
+  function updateButtons() {
+    loadMoreBtn?.classList.toggle("hidden", reachedEnd);
+    seeLessBtn?.classList.toggle("hidden", page <= 2);
   }
 
   async function loadPage() {
@@ -60,7 +60,7 @@ export async function homeIndexHandler() {
         if (page === 1) {
           grid.innerHTML = `<p class="text-gray-300">No listings available.</p>`;
         }
-        updateButton();
+        updateButtons();
         return;
       }
 
@@ -70,47 +70,43 @@ export async function homeIndexHandler() {
       );
 
       if (items.length < limit) reachedEnd = true;
-      if (page > 1) expanded = true;
       page += 1;
-      updateButton();
+      updateButtons();
     } catch (err) {
       uiSetLoading(false);
       grid.insertAdjacentHTML(
         "beforeend",
         `<p class="col-span-full text-red-300">Loading failed: ${err.message}</p>`,
       );
+      updateButtons();
     } finally {
       isLoading = false;
     }
   }
 
-  // Keeps the first page already in the DOM instead of fetching it again
   function seeLess() {
     while (grid.children.length > limit) {
       grid.lastElementChild.remove();
     }
     page = 2;
     reachedEnd = false;
-    expanded = false;
-    updateButton();
+    updateButtons();
     grid.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   function resetAndLoad() {
     page = 1;
     reachedEnd = false;
-    expanded = false;
     grid.innerHTML = "";
     loadMoreBtn?.classList.add("hidden");
+    seeLessBtn?.classList.add("hidden");
     loadPage();
   }
 
   resetAndLoad();
 
-  loadMoreBtn?.addEventListener("click", () => {
-    if (expanded) seeLess();
-    else loadPage();
-  });
+  loadMoreBtn?.addEventListener("click", loadPage);
+  seeLessBtn?.addEventListener("click", seeLess);
 
   statusSelect?.addEventListener("change", () => {
     const v = statusSelect.value;
